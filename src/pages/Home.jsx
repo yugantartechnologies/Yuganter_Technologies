@@ -1,0 +1,51 @@
+import React, { useState } from 'react';
+import Navbar from '../components/Navbar';
+import Hero from '../components/Hero';
+import StatsSection from '../components/StatsSection';
+import Features from '../components/Features';
+import CourseHighlights from '../components/CourseHighlights';
+import Testimonials from '../components/Testimonials';
+import CTASection from '../components/CTASection';
+import EnrollmentModal from '../components/EnrollmentModal';
+import Footer from '../components/Footer';
+
+export default function Home() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState(null);
+
+  const handleQuickEnroll = () => {
+    // Default course for quick enrollment
+    setSelectedCourse({
+      title: "Full Stack Development (MERN)",
+      icon: "💻",
+      duration: "6 Months"
+    });
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedCourse(null);
+  };
+
+  return (
+    <div className="min-h-screen flex flex-col bg-white text-gray-800">
+      <Navbar />
+      <main className="flex-grow">
+        <Hero onQuickEnroll={handleQuickEnroll} />
+        <StatsSection />
+        <Features />
+        <CourseHighlights />
+        <Testimonials />
+        <CTASection onQuickEnroll={handleQuickEnroll} />
+      </main>
+      <EnrollmentModal
+        course={selectedCourse}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onSuccess={() => console.log("Quick enrollment successful")}
+      />
+      <Footer />
+    </div>
+  );
+}
