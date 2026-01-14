@@ -35,6 +35,11 @@ export default function InternshipModal({ internship, isOpen, onClose }) {
             setShowSuccess(true);
             setIsSubmitting(false);
 
+            // Save to localStorage
+            const applications = JSON.parse(localStorage.getItem('internshipApplications') || '[]');
+            applications.push({ ...formData, id: Date.now(), submittedAt: new Date().toISOString() });
+            localStorage.setItem('internshipApplications', JSON.stringify(applications));
+
             setTimeout(() => {
                 onClose();
                 setShowSuccess(false);

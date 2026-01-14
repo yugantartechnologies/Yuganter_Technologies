@@ -34,6 +34,11 @@ export default function EnrollmentModal({ course, isOpen, onClose, onSuccess }) 
       setShowSuccess(true);
       setIsSubmitting(false);
 
+      // Save to localStorage
+      const inquiries = JSON.parse(localStorage.getItem('courseInquiries') || '[]');
+      inquiries.push({ ...formData, id: Date.now(), submittedAt: new Date().toISOString() });
+      localStorage.setItem('courseInquiries', JSON.stringify(inquiries));
+
       setTimeout(() => {
         if (onSuccess) onSuccess();
         handleClose();

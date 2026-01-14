@@ -21,6 +21,10 @@ export default function Contact() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Save to localStorage
+    const inquiries = JSON.parse(localStorage.getItem('generalInquiries') || '[]');
+    inquiries.push({ ...formData, id: Date.now(), submittedAt: new Date().toISOString() });
+    localStorage.setItem('generalInquiries', JSON.stringify(inquiries));
     // Handle form submission here
     alert("Thank you for contacting us! We will get back to you soon.");
     setFormData({
@@ -128,28 +132,7 @@ export default function Contact() {
                   />
                 </div>
 
-                <div>
-                  <label htmlFor="course" className="block text-sm font-semibold text-gray-700 mb-2">
-                    Interested Course
-                  </label>
-                  <select
-                    id="course"
-                    name="course"
-                    value={formData.course}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-secondary-500 focus:border-transparent transition-all"
-                  >
-                    <option value="">Select a course</option>
-                    <option value="mern">Full Stack Development (MERN)</option>
-                    <option value="python">Python Development</option>
-                    <option value="java">Java Full Stack</option>
-                    <option value="uiux">UI/UX Design</option>
-                    <option value="datascience">Data Science & AI/ML</option>
-                    <option value="mobile">Mobile App Development</option>
-                    <option value="internship">Internship Program</option>
-                  </select>
-                </div>
-
+               
                 <div>
                   <label htmlFor="message" className="block text-sm font-semibold text-gray-700 mb-2">
                     Message *

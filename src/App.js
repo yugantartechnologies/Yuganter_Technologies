@@ -13,6 +13,11 @@ import JavaCourse from './pages/JavaCourse';
 import UiUxCourse from './pages/UiUxCourse';
 import DataScienceCourse from './pages/DataScienceCourse';
 import MobileAppCourse from './pages/MobileAppCourse';
+import AdminLogin from './admin/AdminLogin';
+import AdminDashboard from './admin/AdminDashboard';
+import AdminInternshipList from './admin/AdminInternshipList';
+import AdminCourseInquiries from './admin/AdminCourseInquiries';
+import AdminGeneralInquiries from './admin/AdminGeneralInquiries';
 import FloatingEnrollButton from './components/FloatingEnrollButton';
 
 function App() {
@@ -32,6 +37,11 @@ function App() {
           <Route path="/internship" element={<Internship />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/course-inquiries" element={<AdminCourseInquiries />} />
+          <Route path="/admin/internships" element={<AdminInternshipList />} />
+          <Route path="/admin/general-inquiries" element={<AdminGeneralInquiries />} />
         </Routes>
         <FloatingEnrollButton />
       </div>
