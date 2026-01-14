@@ -1,220 +1,228 @@
 import React from "react";
+import { motion } from "framer-motion";
+import Navbar from "../components/Navbar";
 import PageHeader from "../components/PageHeader";
 import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
 
 export default function About() {
   const stats = [
-    { number: "5000+", label: "Students Trained" },
-    { number: "4.9", label: "Google Rating" },
-    { number: "100%", label: "Placement Assistance" },
-    { number: "50+", label: "Expert Trainers" }
+    { number: "5000+", label: "Students Trained", icon: "👥" },
+    { number: "4.9★", label: "Google Rating", icon: "⭐" },
+    { number: "100%", label: "Placement Support", icon: "🎯" },
+    { number: "50+", label: "Expert Mentors", icon: "👨‍🏫" }
   ];
 
   const values = [
     {
-      icon: "🎯",
-      title: "Excellence",
-      description: "We strive for excellence in everything we do, ensuring the highest quality education and training."
+      title: "Industry First Learning",
+      desc: "Skills-focused training designed for real-world IT careers, not just certificates.",
+      icon: "🚀"
     },
     {
-      icon: "🤝",
-      title: "Integrity",
-      description: "We maintain the highest standards of integrity and transparency in all our interactions."
+      title: "Integrity & Transparency",
+      desc: "Honest guidance, realistic outcomes, and long-term student success.",
+      icon: "🤝"
     },
     {
-      icon: "🚀",
-      title: "Innovation",
-      description: "We continuously innovate our curriculum to stay ahead of industry trends and technologies."
+      title: "Innovation Driven",
+      desc: "Curriculum aligned with modern tools, frameworks, and global tech trends.",
+      icon: "💡"
     },
     {
-      icon: "💡",
-      title: "Student Success",
-      description: "Your success is our success. We are committed to helping every student achieve their career goals."
+      title: "Student-Centric Approach",
+      desc: "Every student receives mentorship, confidence, and career direction.",
+      icon: "🎓"
     }
   ];
 
-  const team = [
-    {
-      name: "Expert Trainers",
-      role: "Industry Professionals",
-      description: "Our trainers have years of real-world experience in top IT companies."
-    },
-    {
-      name: "Career Counselors",
-      role: "Placement Support",
-      description: "Dedicated team helping students with resume building and interview preparation."
-    },
-    {
-      name: "Technical Support",
-      role: "24/7 Assistance",
-      description: "Round-the-clock support to help you with any technical queries or issues."
+  const fadeInUp = {
+    initial: { opacity: 0, y: 60 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.6 }
+  };
+
+  const stagger = {
+    animate: {
+      transition: {
+        staggerChildren: 0.1
+      }
     }
-  ];
+  };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex flex-col">
       <Navbar />
-      <PageHeader 
-        title="About Us" 
-        subtitle="Your Career Partner"
+
+      <PageHeader
+        title="About Yugantar Technologies"
+        subtitle="Building Skills. Creating Careers. Shaping the Next Generation."
       />
-      
+
       <main className="flex-grow">
-        {/* Stats Section */}
-        <section className="py-16 bg-gradient-to-br from-secondary-500 to-primary-500 text-white">
+        {/* Hero Stats */}
+        <motion.section
+          className="py-16 bg-gradient-to-r from-primary-600 via-secondary-600 to-accent-600 text-white"
+          initial="initial"
+          animate="animate"
+          variants={stagger}
+        >
           <div className="max-w-7xl mx-auto px-6">
+            <motion.h2 className="text-4xl font-bold text-center mb-12" variants={fadeInUp}>
+              Our Impact in Numbers
+            </motion.h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {stats.map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2">{stat.number}</div>
-                  <div className="text-sm md:text-base opacity-90">{stat.label}</div>
-                </div>
+              {stats.map((s, i) => (
+                <motion.div
+                  key={i}
+                  className="text-center bg-white/10 backdrop-blur-sm rounded-2xl p-6 hover:bg-white/20 transition-all duration-300"
+                  variants={fadeInUp}
+                >
+                  <div className="text-4xl mb-2">{s.icon}</div>
+                  <h3 className="text-3xl font-bold">{s.number}</h3>
+                  <p className="opacity-90 mt-1">{s.label}</p>
+                </motion.div>
               ))}
             </div>
           </div>
-        </section>
+        </motion.section>
 
-        {/* About Section */}
-        <section className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-              <div>
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-dark-900 mb-6">
-                  Who We Are
-                </h2>
-                <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-4">
-                  YugAntar Technologies is a leading IT training institute committed to transforming careers through quality education and practical training. We believe in empowering students with industry-relevant skills that make them job-ready.
-                </p>
-                <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-4">
-                  With years of experience in the IT industry, we understand what employers are looking for. Our curriculum is designed by industry experts to bridge the gap between academic learning and real-world application.
-                </p>
-                <p className="text-sm md:text-base text-gray-600 leading-relaxed">
-                  Located in the heart of Ahmedabad, we have trained thousands of students who are now working in top IT companies across India and abroad.
-                </p>
-              </div>
-              <div className="bg-gradient-to-br from-secondary-500 to-primary-500 rounded-2xl p-8 text-white shadow-2xl">
-                <h3 className="text-lg md:text-xl font-bold mb-4">Our Mission</h3>
-                <p className="text-sm md:text-base mb-6 leading-relaxed">
-                  To provide world-class IT education and training that empowers individuals to build successful careers in technology, while maintaining the highest standards of excellence and integrity.
-                </p>
-                <h3 className="text-lg md:text-xl font-bold mb-4">Our Vision</h3>
-                <p className="text-sm md:text-base leading-relaxed">
-                  To become the most trusted IT training institute in India, recognized for producing industry-ready professionals who drive innovation and excellence in the tech world.
-                </p>
-              </div>
+        {/* Story Timeline */}
+        <motion.section
+          className="py-20 bg-white"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+          variants={stagger}
+        >
+          <div className="max-w-4xl mx-auto px-6">
+            <motion.h2 className="text-4xl font-bold text-center mb-12 text-gray-800" variants={fadeInUp}>
+              Our Story — A New Era Begins
+            </motion.h2>
+            <div className="space-y-8">
+              <motion.div className="flex items-start space-x-4" variants={fadeInUp}>
+                <div className="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
+                  <span className="text-2xl">🌟</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">The Beginning</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Yugantar Technologies was founded by five friends who once stood where many
+                    students stand today — ambitious, capable, yet confused by outdated education
+                    systems and lack of practical exposure.
+                  </p>
+                </div>
+              </motion.div>
+              <motion.div className="flex items-start space-x-4" variants={fadeInUp}>
+                <div className="flex-shrink-0 w-12 h-12 bg-secondary-100 rounded-full flex items-center justify-center">
+                  <span className="text-2xl">🔄</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">The Transformation</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Instead of accepting the gap between education and industry, we chose to
+                    transform it. <strong>Yugantar</strong> means a new era — and that is exactly
+                    what we aim to create in technical education.
+                  </p>
+                </div>
+              </motion.div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
-        {/* Values Section */}
-        <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+        {/* Mission & Vision */}
+        <motion.section
+          className="py-20 bg-gradient-to-r from-gray-100 to-gray-200"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+          variants={stagger}
+        >
           <div className="max-w-7xl mx-auto px-6">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#081a3a] text-center mb-12">
-              Our Core Values
-            </h2>
+            <motion.h2 className="text-4xl font-bold text-center mb-12 text-gray-800" variants={fadeInUp}>
+              Our Mission & Vision
+            </motion.h2>
+            <div className="grid md:grid-cols-2 gap-12">
+              <motion.div
+                className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+                variants={fadeInUp}
+              >
+                <div className="text-6xl mb-4">🎯</div>
+                <h3 className="text-2xl font-bold mb-4 text-primary-600">Our Mission</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  To empower students with practical IT skills, industry confidence,
+                  and career clarity through honest education and expert mentorship.
+                </p>
+              </motion.div>
+              <motion.div
+                className="bg-gradient-to-br from-primary-600 to-secondary-600 p-8 rounded-3xl text-white shadow-lg hover:shadow-xl transition-shadow duration-300"
+                variants={fadeInUp}
+              >
+                <div className="text-6xl mb-4">🚀</div>
+                <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
+                <p className="leading-relaxed">
+                  To become India's most trusted IT training institute — producing
+                  professionals who are globally competitive and ethically strong.
+                </p>
+              </motion.div>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Core Values */}
+        <motion.section
+          className="py-20 bg-white"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+          variants={stagger}
+        >
+          <div className="max-w-7xl mx-auto px-6">
+            <motion.h2 className="text-4xl font-bold text-center mb-12 text-gray-800" variants={fadeInUp}>
+              What Makes Us Different
+            </motion.h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {values.map((value, index) => (
-                <div
-                  key={index}
-                  className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+              {values.map((v, i) => (
+                <motion.div
+                  key={i}
+                  className="bg-gradient-to-br from-white to-gray-50 p-6 rounded-2xl shadow hover:shadow-lg transition-all duration-300 hover:scale-105"
+                  variants={fadeInUp}
                 >
-                  <div className="text-5xl mb-4">{value.icon}</div>
-                  <h3 className="text-base md:text-lg font-bold text-gray-800 mb-3">{value.title}</h3>
-                  <p className="text-sm md:text-base text-gray-600 leading-relaxed">{value.description}</p>
-                </div>
+                  <div className="text-4xl mb-4">{v.icon}</div>
+                  <h4 className="font-bold text-lg mb-3 text-gray-800">{v.title}</h4>
+                  <p className="text-gray-600 text-sm">{v.desc}</p>
+                </motion.div>
               ))}
             </div>
           </div>
-        </section>
+        </motion.section>
 
-        {/* Team Section */}
-        <section className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-6">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#081a3a] text-center mb-12">
-              Our Team
-            </h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              {team.map((member, index) => (
-                <div
-                  key={index}
-                  className="bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl shadow-lg border border-gray-100 text-center hover:shadow-xl transition-all duration-300"
-                >
-                  <div className="w-20 h-20 bg-gradient-to-br from-secondary-500 to-primary-500 rounded-full flex items-center justify-center text-white text-3xl font-bold mx-auto mb-4">
-                    {member.name.charAt(0)}
-                  </div>
-                  <h3 className="text-base md:text-lg font-bold text-gray-800 mb-2">{member.name}</h3>
-                  <p className="text-sm md:text-base text-secondary-600 font-semibold mb-4">{member.role}</p>
-                  <p className="text-sm md:text-base text-gray-600 leading-relaxed">{member.description}</p>
-                </div>
-              ))}
-            </div>
+        {/* Team Philosophy */}
+        <motion.section
+          className="py-20 bg-gradient-to-r from-primary-50 to-secondary-50"
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+        >
+          <div className="max-w-4xl mx-auto px-6 text-center">
+            <motion.h2 className="text-4xl font-bold mb-6 text-gray-800" variants={fadeInUp}>
+              Five Minds. One Mission.
+            </motion.h2>
+            <motion.p className="text-gray-600 leading-relaxed text-lg" variants={fadeInUp}>
+              Our team combines technology, teaching, strategy, communication,
+              and operations — united by a single goal:
+              <strong className="text-primary-600"> transforming Indian talent into world-class professionals.</strong>
+            </motion.p>
+            <motion.div className="mt-8 flex justify-center space-x-4" variants={fadeInUp}>
+              <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center text-2xl">🧠</div>
+              <div className="w-16 h-16 bg-secondary-100 rounded-full flex items-center justify-center text-2xl">👥</div>
+              <div className="w-16 h-16 bg-accent-100 rounded-full flex items-center justify-center text-2xl">🎯</div>
+            </motion.div>
           </div>
-        </section>
+        </motion.section>
 
-        {/* Location Section */}
-        <section className="py-20 bg-gradient-to-br from-dark-900 to-dark-800 text-white">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid md:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6">Visit Our Campus</h2>
-                <p className="text-sm md:text-base opacity-90 leading-relaxed mb-6">
-                  Located in the heart of Ahmedabad, our modern campus provides the perfect learning environment with state-of-the-art facilities and infrastructure.
-                </p>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-4">
-                    <svg className="w-6 h-6 text-secondary-400 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                    <div>
-                      <p className="font-semibold">Address</p>
-                      <p className="opacity-90">204, 2nd Floor, Yash Aqua, Vijay Cross Road, Navrangpura, Ahmedabad - 380009</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <svg className="w-6 h-6 text-secondary-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                    <div>
-                      <p className="font-semibold">Phone</p>
-                      <a href="tel:+919054372690" className="opacity-90 hover:text-secondary-400 transition-colors">+91 90543 72690</a>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <svg className="w-6 h-6 text-secondary-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    <div>
-                      <p className="font-semibold">Email</p>
-                      <a href="mailto:info@yugantertech.com" className="opacity-90 hover:text-secondary-400 transition-colors">info@yugantertech.com</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-                <h3 className="text-2xl font-bold mb-4">Why Choose Us?</h3>
-                <ul className="space-y-3">
-                  {[
-                    "Industry-experienced trainers",
-                    "Practical, project-based learning",
-                    "100% placement assistance",
-                    "Modern infrastructure & facilities",
-                    "Flexible batch timings",
-                    "Affordable fee structure"
-                  ].map((item, index) => (
-                    <li key={index} className="flex items-center gap-3">
-                      <svg className="w-5 h-5 text-secondary-400 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
+       
+
       </main>
 
       <Footer />

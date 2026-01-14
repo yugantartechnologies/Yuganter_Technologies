@@ -45,7 +45,7 @@ export default function Hero({ onQuickEnroll }) {
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <button
+            {/* <button
               onClick={onQuickEnroll}
               className="group px-6 py-3 bg-gradient-to-r from-secondary-500 to-primary-500 hover:from-secondary-600 hover:to-primary-600 text-white font-semibold text-base rounded-xl shadow-xl shadow-secondary-500/30 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-secondary-500/50 flex items-center justify-center gap-2"
             >
@@ -53,7 +53,7 @@ export default function Hero({ onQuickEnroll }) {
               <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
               </svg>
-            </button>
+            </button> */}
             <Link
               to="/courses"
               className="px-6 py-3 border-2 border-primary-400/80 text-primary-300 hover:bg-primary-500/20 hover:border-primary-400 hover:text-white font-semibold text-base rounded-xl transition-all duration-300 backdrop-blur-sm text-center"

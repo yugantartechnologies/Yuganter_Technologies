@@ -1,18 +1,37 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function CourseCard({ course, onEnroll }) {
+  const getCourseSlug = (title) => {
+    const slugs = {
+      "Full Stack Development (MERN)": "full-stack-mern",
+      "Python Development": "python-development",
+      "Java Full Stack": "java-full-stack",
+      "UI/UX Design": "ui-ux-design",
+      "Data Science & AI/ML": "data-science-ai-ml",
+      "Mobile App Development": "mobile-app-development"
+    };
+    return slugs[title] || title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  };
   return (
     <div className="group bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:-translate-y-2 hover:border-secondary-200 overflow-hidden">
       {/* Course Image */}
-      <div className="relative h-48 overflow-hidden bg-gradient-to-br from-secondary-500 to-primary-500">
-        <div className="absolute inset-0 flex items-center justify-center text-white text-6xl">
-          {course.icon}
-        </div>
-        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-bold text-secondary-600">
+      <div className="relative h-48 overflow-hidden">
+        <img
+          src={course.imageUrl}
+          alt={course.title}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+
+        {/* Overlay (optional for better text visibility) */}
+        <div className="absolute inset-0 bg-black/20"></div>
+
+        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-bold text-secondary-600 z-10">
           {course.duration}
         </div>
+
         {course.popular && (
-          <div className="absolute top-4 left-4 bg-gradient-to-r from-secondary-500 to-primary-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+          <div className="absolute top-4 left-4 bg-gradient-to-r from-secondary-500 to-primary-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg z-10">
             ⭐ Popular
           </div>
         )}
@@ -44,7 +63,17 @@ export default function CourseCard({ course, onEnroll }) {
         </ul>
 
         {/* Footer */}
-        <div className="pt-4 border-t border-gray-100">
+        <div className="pt-4 border-t border-gray-100 space-y-3">
+          <Link
+            to={`/courses/${getCourseSlug(course.title)}`}
+            className="w-full px-4 py-2.5 border border-secondary-500 text-secondary-600 font-semibold text-sm md:text-base rounded-xl hover:bg-secondary-50 transition-all duration-300 flex items-center justify-center gap-2"
+          >
+            <span>View Details</span>
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+          </Link>
           <button 
             onClick={() => onEnroll && onEnroll(course)}
             className="w-full px-4 py-2.5 bg-gradient-to-r from-secondary-500 to-primary-500 hover:from-secondary-600 hover:to-primary-600 text-white font-semibold text-sm md:text-base rounded-xl transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg flex items-center justify-center gap-2"

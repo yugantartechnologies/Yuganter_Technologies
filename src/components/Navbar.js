@@ -25,20 +25,20 @@ export default function Navbar() {
   ];
 
   return (
-    <header className={`w-full bg-gradient-to-r from-dark-900 via-dark-800 to-dark-900 fixed top-0 z-50 transition-all duration-300 ${
-      scrolled ? 'shadow-xl backdrop-blur-md bg-opacity-95' : 'shadow-lg'
-    }`}>
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-5 md:px-8 h-18 md:h-20">
+    <header className={`w-full bg-gradient-to-r from-dark-900 via-dark-800 to-dark-900 fixed top-0 z-50 transition-all duration-300 ${scrolled ? 'shadow-xl backdrop-blur-md bg-opacity-95' : 'shadow-lg'
+      }`}>
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 h-20 md:h-20 lg:h-20">
         {/* Logo */}
         <Link to="/" className="flex items-center group cursor-pointer">
-          <div className="relative">
+          <div className="px-2 relative flex items-center justify-center">
             <img
               src={logo}
               alt="YugAntar"
-              className="w-12 h-12 md:w-14 md:h-14 mr-3 rounded-full object-contain transition-transform duration-300 group-hover:scale-110"
+              className="w-12 h-12 md:w-14 md:h-14 rounded-full object-contain transition-transform duration-300 group-hover:scale-110"
             />
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-secondary-400/20 to-primary-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </div>
+
           <h1 className="text-base md:text-lg lg:text-xl font-bold bg-gradient-to-r from-secondary-400 to-primary-400 bg-clip-text text-transparent">
             YugAntar Technologies
           </h1>
@@ -50,9 +50,8 @@ export default function Navbar() {
             <Link
               key={item.name}
               to={item.path}
-              className={`text-white text-sm md:text-base font-medium relative py-2 transition-colors duration-300 hover:text-secondary-300 after:content-[''] after:absolute after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-secondary-400 after:to-primary-400 after:left-0 after:bottom-0 hover:after:w-full after:transition-all after:duration-300 ${
-                location.pathname === item.path ? 'text-secondary-300 after:w-full' : ''
-              }`}
+              className={`text-white text-sm md:text-base font-medium relative py-2 transition-colors duration-300 hover:text-secondary-300 after:content-[''] after:absolute after:w-0 after:h-[2px] after:bg-gradient-to-r after:from-secondary-400 after:to-primary-400 after:left-0 after:bottom-0 hover:after:w-full after:transition-all after:duration-300 ${location.pathname === item.path ? 'text-secondary-300 after:w-full' : ''
+                }`}
             >
               {item.name}
             </Link>
@@ -90,17 +89,15 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-        isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-      }`}>
+      <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        }`}>
         <nav className="bg-gradient-to-b from-dark-900/98 to-dark-800/98 backdrop-blur-md px-5 py-6 flex flex-col gap-4 border-t border-white/10">
           {navItems.map((item) => (
             <Link
               key={item.name}
               to={item.path}
-              className={`text-white text-base font-medium hover:text-secondary-300 transition-colors duration-200 py-2 border-b border-white/5 hover:border-secondary-400/30 ${
-                location.pathname === item.path ? 'text-secondary-300' : ''
-              }`}
+              className={`text-white text-base font-medium hover:text-secondary-300 transition-colors duration-200 py-2 border-b border-white/5 hover:border-secondary-400/30 ${location.pathname === item.path ? 'text-secondary-300' : ''
+                }`}
               onClick={() => setIsOpen(false)}
             >
               {item.name}

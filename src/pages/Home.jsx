@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
-import StatsSection from '../components/StatsSection';
 import Features from '../components/Features';
 import CourseHighlights from '../components/CourseHighlights';
 import Testimonials from '../components/Testimonials';
@@ -33,7 +32,6 @@ export default function Home() {
       <Navbar />
       <main className="flex-grow">
         <Hero onQuickEnroll={handleQuickEnroll} />
-        <StatsSection />
         <Features />
         <CourseHighlights />
         <Testimonials />

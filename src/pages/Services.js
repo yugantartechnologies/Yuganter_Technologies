@@ -153,10 +153,10 @@ export default function Services() {
                   Contact Us
                 </Link>
                 <a
-                  href="tel:+919054372690"
+                  href="tel:+916355582605"
                   className="block w-full px-6 py-3 border-2 border-white text-white font-semibold rounded-xl hover:bg-white/10 transition-all duration-300 text-center"
                 >
-                  Call: +91 90543 72690
+                  Call: +91 6355582605
                 </a>
               </div>
             </div>
