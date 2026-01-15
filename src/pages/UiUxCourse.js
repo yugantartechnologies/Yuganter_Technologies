@@ -36,11 +36,11 @@ export default function UiUxCourse() {
     prerequisites: "No prior experience required",
     mode: "Online/Offline",
     technologies: [
-      { name: "Figma", icon: "https://cdn.worldvectorlogo.com/logos/figma-1.svg", color: "#F24E1E" },
-      { name: "Adobe XD", icon: "https://cdn.worldvectorlogo.com/logos/adobe-xd.svg", color: "#FF61F6" },
+      { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg", color: "#F24E1E" },
+      { name: "Adobe XD", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xd/xd-plain.svg", color: "#FF61F6" },
       { name: "Sketch", icon: "https://cdn.worldvectorlogo.com/logos/sketch.svg", color: "#F7B500" },
-      { name: "Photoshop", icon: "https://cdn.worldvectorlogo.com/logos/adobe-photoshop-cc.svg", color: "#31A8FF" },
-      { name: "Illustrator", icon: "https://cdn.worldvectorlogo.com/logos/adobe-illustrator-cc.svg", color: "#FF9A00" },
+      { name: "Photoshop", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg", color: "#31A8FF" },
+      { name: "Illustrator", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg", color: "#FF9A00" },
       { name: "InVision", icon: "https://cdn.worldvectorlogo.com/logos/invision.svg", color: "#FF3366" },
     ],
     careerOpportunities: [

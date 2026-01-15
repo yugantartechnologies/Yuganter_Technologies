@@ -37,10 +37,10 @@ export default function JavaCourse() {
     mode: "Online/Offline",
     technologies: [
       { name: "Java", icon: "https://cdn.worldvectorlogo.com/logos/java-4.svg", color: "#ED8B00" },
-      { name: "Spring Boot", icon: "https://cdn.worldvectorlogo.com/logos/spring-boot.svg", color: "#6DB33F" },
+      { name: "Spring Boot", icon: "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/springboot.svg", color: "#6DB33F" },
       { name: "Hibernate", icon: "https://cdn.worldvectorlogo.com/logos/hibernate.svg", color: "#59666C" },
       { name: "MySQL", icon: "https://cdn.worldvectorlogo.com/logos/mysql-logo-pure.svg", color: "#4479A1" },
-      { name: "JSP", icon: "https://cdn.worldvectorlogo.com/logos/jsp.svg", color: "#007396" },
+      { name: "JSP", icon: "https://cdn.worldvectorlogo.com/logos/java-4.svg", color: "#007396" },
       { name: "Servlets", icon: "https://cdn.worldvectorlogo.com/logos/java-4.svg", color: "#ED8B00" }
     ],
     careerOpportunities: [

@@ -40,9 +40,9 @@ export default function DataScienceCourse() {
       { name: "Python", icon: "https://cdn.worldvectorlogo.com/logos/python-5.svg", color: "#3776AB" },
       { name: "TensorFlow", icon: "https://cdn.worldvectorlogo.com/logos/tensorflow-2.svg", color: "#FF6F00" },
       { name: "Pandas", icon: "https://pandas.pydata.org/static/img/pandas_mark.svg", color: "#150458" },
-      { name: "NumPy", icon: "https://numpy.org/images/logos/numpy.svg", color: "#013243" },
+      { name: "NumPy", icon: "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/numpy.svg", color: "#013243" },
       { name: "Scikit-learn", icon: "https://scikit-learn.org/stable/_static/scikit-learn-logo-small.png", color: "#F7931E" },
-      { name: "Jupyter", icon: "https://jupyter.org/assets/main-logo.svg", color: "#F37626" },
+      { name: "Jupyter", icon: "https://logo.svgcdn.com/devicon/jupyter-original.svg", color: "#F37626" },
     ],
     careerOpportunities: [
       { title: "Data Scientist", description: "Analyze complex data sets and extract insights.", icon: <ChartBarIcon className="w-8 h-8 text-blue-500" /> },

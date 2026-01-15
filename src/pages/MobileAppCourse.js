@@ -39,7 +39,7 @@ export default function MobileAppCourse() {
       { name: "React Native", icon: "https://cdn.worldvectorlogo.com/logos/react-2.svg", color: "#61DAFB" },
       { name: "Flutter", icon: "https://cdn.worldvectorlogo.com/logos/flutter.svg", color: "#02569B" },
       { name: "Dart", icon: "https://cdn.worldvectorlogo.com/logos/dart.svg", color: "#00B4AB" },
-      { name: "JavaScript", icon: "https://cdn.worldvectorlogo.com/logos/javascript.svg", color: "#F7DF1E" },
+      { name: "JavaScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg", color: "#F7DF1E" },
       { name: "Firebase", icon: "https://cdn.worldvectorlogo.com/logos/firebase-1.svg", color: "#FFCA28" },
       { name: "SQLite", icon: "https://cdn.worldvectorlogo.com/logos/sqlite.svg", color: "#003B57" }
     ],

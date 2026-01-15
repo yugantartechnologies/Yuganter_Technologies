@@ -41,7 +41,7 @@ export default function PythonCourse() {
       { name: "SQLite", icon: "https://cdn.worldvectorlogo.com/logos/sqlite.svg", color: "#003B57" },
       { name: "PostgreSQL", icon: "https://cdn.worldvectorlogo.com/logos/postgresql.svg", color: "#4169E1" },
       { name: "Pandas", icon: "https://pandas.pydata.org/static/img/pandas_mark.svg", color: "#150458" },
-      { name: "BeautifulSoup", icon: "https://cdn.worldvectorlogo.com/logos/beautifulsoup.svg", color: "#5C8FBC" }
+      { name: "Numpy", icon: "https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/numpy.svg", color: "#5C8FBC" }
     ],
     careerOpportunities: [
       { title: "Python Developer", description: "Develop applications using Python programming language.", icon: <CodeBracketIcon className="w-8 h-8 text-blue-500" /> },
