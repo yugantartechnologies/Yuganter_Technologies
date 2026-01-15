@@ -7,13 +7,73 @@ import Navbar from "../components/Navbar";
 
 export default function Services() {
   useEffect(() => {
-    document.title = 'IT Services - YugAnter Technologies';
+    document.title = 'IT Services Ahmedabad - YugAnter Technologies';
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Discover our IT services including training, software development, consulting, and more. Empowering businesses with innovative technology solutions.');
+      metaDescription.setAttribute('content', 'Best IT services in Navrangpura Ahmedabad - Web development, mobile app development, software solutions, digital marketing, and IT consultancy for businesses.');
     }
   }, []);
   const services = [
+    {
+      title: "Web Development Company Ahmedabad",
+      description: "Professional web development services including custom website design, e-commerce development, and responsive web solutions for businesses in Ahmedabad.",
+      icon: "🌐",
+      features: [
+        "Custom web design",
+        "E-commerce development",
+        "Responsive websites",
+        "CMS integration",
+        "SEO optimization"
+      ]
+    },
+    {
+      title: "Mobile App Development Ahmedabad",
+      description: "Expert mobile app development for iOS and Android platforms. Create innovative mobile solutions for your business needs.",
+      icon: "📱",
+      features: [
+        "iOS & Android apps",
+        "Cross-platform development",
+        "UI/UX design",
+        "App testing & deployment",
+        "Maintenance & support"
+      ]
+    },
+    {
+      title: "Software Solutions for Businesses",
+      description: "Custom software development services tailored to your business requirements. ERP, CRM, and automation solutions.",
+      icon: "💻",
+      features: [
+        "Custom software development",
+        "ERP solutions",
+        "Business automation",
+        "Cloud solutions",
+        "AI & IoT integration"
+      ]
+    },
+    {
+      title: "Digital Marketing Services Ahmedabad",
+      description: "Comprehensive digital marketing solutions including SEO, social media marketing, and online advertising to grow your business.",
+      icon: "📈",
+      features: [
+        "SEO & SEM",
+        "Social media marketing",
+        "Content marketing",
+        "PPC campaigns",
+        "Analytics & reporting"
+      ]
+    },
+    {
+      title: "IT Consultancy Ahmedabad",
+      description: "Expert IT consulting services to help businesses leverage technology for growth and efficiency.",
+      icon: "🧠",
+      features: [
+        "Technology consulting",
+        "System analysis",
+        "IT strategy planning",
+        "Digital transformation",
+        "Tech support"
+      ]
+    },
     {
       title: "IT Training & Education",
       description: "Comprehensive training programs in cutting-edge technologies with hands-on projects and industry mentorship.",
@@ -24,66 +84,6 @@ export default function Services() {
         "Certification programs",
         "Career guidance & counseling",
         "Placement assistance"
-      ]
-    },
-    {
-      title: "Corporate Training",
-      description: "Customized training solutions for businesses to upskill their teams and stay competitive.",
-      icon: "🏢",
-      features: [
-        "Customized curriculum",
-        "On-site & online training",
-        "Team-based learning",
-        "Progress tracking",
-        "Post-training support"
-      ]
-    },
-    {
-      title: "Internship Programs",
-      description: "Real-world internship opportunities to gain practical experience and build your portfolio.",
-      icon: "💼",
-      features: [
-        "Live project assignments",
-        "Mentor guidance",
-        "Industry exposure",
-        "Certificate of completion",
-        "Job placement support"
-      ]
-    },
-    {
-      title: "Placement Assistance",
-      description: "End-to-end placement support including resume building, interview prep, and job referrals.",
-      icon: "🚀",
-      features: [
-        "Resume & portfolio review",
-        "Mock interviews",
-        "Job referrals",
-        "Interview preparation",
-        "Career counseling"
-      ]
-    },
-    {
-      title: "Project Development",
-      description: "Custom software development services for businesses and individuals.",
-      icon: "💻",
-      features: [
-        "Web application development",
-        "Mobile app development",
-        "E-commerce solutions",
-        "API development",
-        "Maintenance & support"
-      ]
-    },
-    {
-      title: "Consulting Services",
-      description: "Expert IT consulting to help businesses make informed technology decisions.",
-      icon: "🔍",
-      features: [
-        "Technology assessment",
-        "Architecture design",
-        "Digital transformation",
-        "Process optimization",
-        "Strategic planning"
       ]
     }
   ];

@@ -13,27 +13,14 @@ export default function Home() {
   const [selectedCourse, setSelectedCourse] = useState(null);
 
   useEffect(() => {
-    document.title = 'YugAnter Technologies - Build Your Future-Ready IT Career';
+    document.title = 'YugAnter Technologies Ahmedabad - Best IT Company for Web & Software Development';
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Master Full-Stack Development, MERN Stack, Python, AI/ML, and Data Science with real-world projects at YugAnter Technologies. 100% Placement Assistance.');
+      metaDescription.setAttribute('content', 'YugAnter Technologies Ahmedabad - Leading IT company offering web development, mobile app development, software solutions, and digital marketing services in Navrangpura. Affordable custom software development for businesses.');
     }
   }, []);
 
   const handleQuickEnroll = () => {
-    // Default course for quick enrollment
-    setSelectedCourse({
-      title: "Full Stack Development (MERN)",
-      icon: "💻",
-      duration: "6 Months"
-    });
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedCourse(null);
-  };
     // Default course for quick enrollment
     setSelectedCourse({
       title: "Full Stack Development (MERN)",

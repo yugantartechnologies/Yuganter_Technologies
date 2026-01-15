@@ -22,7 +22,7 @@ export default function Footer() {
               </h2>
             </div>
             <p className="text-sm md:text-base text-gray-300 leading-relaxed mb-6 max-w-md">
-              Committed to quality IT education and professional excellence. Offering courses and training to build stronger careers in tech.
+              YugAnter Technologies Ahmedabad - Leading software development company in Navrangpura offering web development, mobile app solutions, and IT consultancy for businesses in Gujarat.
             </p>
             {/* Social Media Links */}
             <div className="flex gap-4">
@@ -72,6 +72,13 @@ export default function Footer() {
                   Courses
                 </Link>
               </li>
+              
+              <li>
+                <Link to="/blog" className="text-gray-300 hover:text-secondary-400 transition-colors duration-200 flex items-center gap-2 group">
+                  <span className="w-1.5 h-1.5 bg-secondary-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                  Blog
+                </Link>
+              </li>
               <li>
                 <Link to="/internship" className="text-gray-300 hover:text-secondary-400 transition-colors duration-200 flex items-center gap-2 group">
                   <span className="w-1.5 h-1.5 bg-secondary-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
@@ -119,7 +126,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-gray-400 text-sm">
             <p>© {currentYear} YugAnter Technologies – All rights reserved.</p>
             <p>
-              Developed by <span className="text-secondary-400 font-semibold hover:text-secondary-300 transition-colors">Kevalon Technology</span>
+              Developed by <a href="https://www.kevalontechnology.in/" target="_blank" rel="noopener noreferrer" className="text-secondary-400 font-semibold hover:text-secondary-300 transition-colors">Kevalon Technology</a>
             </p>
           </div>
         </div>

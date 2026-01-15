@@ -28,10 +28,10 @@ export default function Hero({ onQuickEnroll }) {
           </div>
           
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-6 tracking-tight">
-            YugAntar Technologies
+            YugAntar Technologies Ahmedabad
             <br />
             <span className="bg-gradient-to-r from-secondary-400 via-secondary-300 to-primary-400 bg-clip-text text-transparent animate-gradient">
-              Build Your Future-Ready IT Career
+              Best IT Company for Web & Software Development
             </span>
           </h1>
 
@@ -40,7 +40,7 @@ export default function Hero({ onQuickEnroll }) {
           </p>
 
           <p className="text-sm md:text-base text-gray-300 mb-10 max-w-xl leading-relaxed">
-            Master Full-Stack Development, MERN Stack, Python, AI/ML, and Data Science with real-world projects and become job-ready in just a few months.
+            Leading software development company Ahmedabad offering web development, mobile app development, digital marketing services, and IT consultancy in Navrangpura. Affordable web design and development for startups and businesses.
           </p>
 
           {/* Buttons */}

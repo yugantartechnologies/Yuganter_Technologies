@@ -7,6 +7,8 @@ import Services from './pages/Services';
 import Internship from './pages/Internship';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Blog from './pages/Blog';
+import BacklinkGuide from './pages/BacklinkGuide';
 import FullStackCourse from './pages/FullStackCourse';
 import PythonCourse from './pages/PythonCourse';
 import JavaCourse from './pages/JavaCourse';
@@ -36,6 +38,8 @@ function App() {
           <Route path="/courses/mobile-app-development" element={<MobileAppCourse />} />
           <Route path="/courses/digital-marketing" element={<DigitalMarketingCourse />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/backlink-guide" element={<BacklinkGuide />} />
           <Route path="/internship" element={<Internship />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />

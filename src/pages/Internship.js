@@ -10,10 +10,10 @@ export default function Internship() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    document.title = 'Internship Programs - YugAnter Technologies';
+    document.title = 'Internship Programs Ahmedabad - YugAnter Technologies';
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Join our internship programs in Web Development, Data Science, and more. Gain practical experience with real projects and expert mentorship.');
+      metaDescription.setAttribute('content', 'Join internship programs in Ahmedabad for Web Development, Data Science, and more. Gain practical experience with expert mentorship at YugAnter Technologies.');
     }
   }, []);
 
