@@ -13,6 +13,7 @@ import JavaCourse from './pages/JavaCourse';
 import UiUxCourse from './pages/UiUxCourse';
 import DataScienceCourse from './pages/DataScienceCourse';
 import MobileAppCourse from './pages/MobileAppCourse';
+import DigitalMarketingCourse from './pages/DigitalMarketingCourse';
 import AdminLogin from './admin/AdminLogin';
 import AdminDashboard from './admin/AdminDashboard';
 import AdminInternshipList from './admin/AdminInternshipList';
@@ -33,6 +34,7 @@ function App() {
           <Route path="/courses/ui-ux-design" element={<UiUxCourse />} />
           <Route path="/courses/data-science-ai-ml" element={<DataScienceCourse />} />
           <Route path="/courses/mobile-app-development" element={<MobileAppCourse />} />
+          <Route path="/courses/digital-marketing" element={<DigitalMarketingCourse />} />
           <Route path="/services" element={<Services />} />
           <Route path="/internship" element={<Internship />} />
           <Route path="/about" element={<About />} />

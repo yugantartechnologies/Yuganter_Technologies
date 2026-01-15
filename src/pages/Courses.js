@@ -100,6 +100,21 @@ export default function Courses() {
         "API Integration",
         "App Store Deployment"
       ]
+    },
+    {
+      title: "Digital Marketing",
+      description: "Master digital marketing strategies, SEO, social media marketing, and analytics to grow businesses online.",
+      imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=96&h=96&fit=crop&crop=center",
+      duration: "4 Months",
+      popular: true,
+      features: [
+        "SEO & SEM",
+        "Social Media Marketing",
+        "Content Marketing",
+        "Google Analytics",
+        "Email Marketing",
+        "PPC Advertising"
+      ]
     }
   ];
 

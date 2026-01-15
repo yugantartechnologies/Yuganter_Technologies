@@ -9,7 +9,8 @@ export default function CourseCard({ course, onEnroll }) {
       "Java Full Stack": "java-full-stack",
       "UI/UX Design": "ui-ux-design",
       "Data Science & AI/ML": "data-science-ai-ml",
-      "Mobile App Development": "mobile-app-development"
+      "Mobile App Development": "mobile-app-development",
+      "Digital Marketing": "digital-marketing"
     };
     return slugs[title] || title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
   };
