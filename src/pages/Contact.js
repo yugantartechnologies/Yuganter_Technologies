@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PageHeader from "../components/PageHeader";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
@@ -11,6 +11,14 @@ export default function Contact() {
     phone: "",
     message: ""
   });
+
+  useEffect(() => {
+    document.title = 'Contact Us - YugAnter Technologies';
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Get in touch with YugAnter Technologies for IT training inquiries, course information, and career guidance. We are here to help you build your IT career.');
+    }
+  }, []);
 
   const handleChange = (e) => {
     let { name, value } = e.target;

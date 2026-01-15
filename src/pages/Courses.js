@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
 import CourseCard from "../components/CourseCard";
@@ -9,6 +9,14 @@ import Navbar from "../components/Navbar";
 export default function Courses() {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = 'IT Courses - YugAnter Technologies';
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Explore our comprehensive IT courses including Full Stack Development, Python, Data Science, and more. Practical training with 100% placement assistance.');
+    }
+  }, []);
 
   const courses = [
     {

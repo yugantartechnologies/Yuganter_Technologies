@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
 import Footer from "../components/Footer";
@@ -8,6 +8,14 @@ import { CodeBracketIcon, CpuChipIcon, ChartBarIcon, GlobeAltIcon, CheckCircleIc
 
 export default function PythonCourse() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = 'Python Development Course - YugAnter Technologies';
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Master Python programming with Django framework. Build scalable web applications and data-driven solutions in our 5-month course with real projects.');
+    }
+  }, []);
 
   const course = {
     title: "Python Development",

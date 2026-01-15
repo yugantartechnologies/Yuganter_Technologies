@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import Navbar from "../components/Navbar";
 import PageHeader from "../components/PageHeader";
 import Footer from "../components/Footer";
 
 export default function About() {
+  useEffect(() => {
+    document.title = 'About Us - YugAnter Technologies';
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Learn about YugAnter Technologies - a leading IT training institute with 5000+ students trained, 4.9 Google rating, and 100% placement support.');
+    }
+  }, []);
   const stats = [
     { number: "5000+", label: "Students Trained", icon: "👥" },
     { number: "4.9★", label: "Google Rating", icon: "⭐" },

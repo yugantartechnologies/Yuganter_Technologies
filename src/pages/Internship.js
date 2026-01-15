@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import PageHeader from "../components/PageHeader";
@@ -8,6 +8,14 @@ import { motion } from "framer-motion";
 export default function Internship() {
   const [selectedInternship, setSelectedInternship] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = 'Internship Programs - YugAnter Technologies';
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Join our internship programs in Web Development, Data Science, and more. Gain practical experience with real projects and expert mentorship.');
+    }
+  }, []);
 
   const internshipPrograms = [
     {

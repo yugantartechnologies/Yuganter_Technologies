@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
 import Footer from "../components/Footer";
@@ -8,6 +8,14 @@ import { CodeBracketIcon, CpuChipIcon, ComputerDesktopIcon, DevicePhoneMobileIco
 
 export default function FullStackCourse() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    document.title = 'Full Stack Development Course - YugAnter Technologies';
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Enroll in our 6-month Full Stack Development course using MERN stack. Learn React, Node.js, MongoDB, and build real-world projects with placement assistance.');
+    }
+  }, []);
 
   const course = {
     title: "Full Stack Development (MERN)",

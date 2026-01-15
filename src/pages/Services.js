@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
 import ServiceCard from "../components/ServiceCard";
@@ -6,6 +6,13 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
 export default function Services() {
+  useEffect(() => {
+    document.title = 'IT Services - YugAnter Technologies';
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Discover our IT services including training, software development, consulting, and more. Empowering businesses with innovative technology solutions.');
+    }
+  }, []);
   const services = [
     {
       title: "IT Training & Education",
