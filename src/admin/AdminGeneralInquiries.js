@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminSidebar from "./AdminSidebar";
+import BASE_URL from "../BASEURL";
 
 const AdminGeneralInquiries = () => {
   const [inquiries, setInquiries] = useState([]);
@@ -14,30 +15,21 @@ const AdminGeneralInquiries = () => {
   }, [navigate]);
 
   useEffect(() => {
-    const inqs = JSON.parse(localStorage.getItem("generalInquiries") || "[]");
-    if (inqs.length === 0) {
-      const staticData = [
-        {
-          id: 1,
-          name: "David Wilson",
-          email: "david@example.com",
-          phone: "+91 9876543216",
-          message: "Interested in your services.",
-          submittedAt: new Date().toISOString(),
-        },
-        {
-          id: 2,
-          name: "Eva Brown",
-          email: "eva@example.com",
-          phone: "+91 9876543217",
-          message: "Need details about Python course.",
-          submittedAt: new Date(Date.now() - 86400000).toISOString(),
-        },
-      ];
-      setInquiries(staticData);
-    } else {
-      setInquiries(inqs);
-    }
+    const fetchGeneralInquiries = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/api/inquiries`);
+        if (response.ok) {
+          const data = await response.json();
+          setInquiries(data);
+        } else {
+          console.error("Failed to fetch inquiries");
+        }
+      } catch (error) {
+        console.error("Error fetching inquiries:", error);
+      }
+    };
+
+    fetchGeneralInquiries();
   }, []);
 
   const handleLogout = () => {
@@ -101,7 +93,7 @@ const AdminGeneralInquiries = () => {
                         {inq.message}
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-500">
-                        {new Date(inq.submittedAt).toLocaleString()}
+                        {new Date(inq.createdAt).toLocaleString()}
                       </td>
                     </tr>
                   ))}
@@ -132,7 +124,7 @@ const AdminGeneralInquiries = () => {
 
                   <p className="text-xs text-gray-500">
                     Submitted:{" "}
-                    {new Date(inq.submittedAt).toLocaleString()}
+                    {new Date(inq.createdAt).toLocaleString()}
                   </p>
                 </div>
               ))}

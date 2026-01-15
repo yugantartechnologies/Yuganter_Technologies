@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminSidebar from "./AdminSidebar";
+import BASE_URL from "../BASEURL";
 
 const AdminCourseInquiries = () => {
   const [inquiries, setInquiries] = useState([]);
@@ -14,30 +15,21 @@ const AdminCourseInquiries = () => {
   }, [navigate]);
 
   useEffect(() => {
-    const inqs = JSON.parse(localStorage.getItem("courseInquiries") || "[]");
-    if (inqs.length === 0) {
-      const staticData = [
-        {
-          id: 1,
-          name: "Alice Johnson",
-          email: "alice@example.com",
-          phone: "+91 9876543213",
-          course: "Full Stack Development (MERN)",
-          submittedAt: new Date().toISOString(),
-        },
-        {
-          id: 2,
-          name: "Bob Smith",
-          email: "bob@example.com",
-          phone: "+91 9876543214",
-          course: "Python Development",
-          submittedAt: new Date(Date.now() - 86400000).toISOString(),
-        },
-      ];
-      setInquiries(staticData);
-    } else {
-      setInquiries(inqs);
-    }
+    const fetchCourseInquiries = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/api/course-inquiries`);
+        if (response.ok) {
+          const data = await response.json();
+          setInquiries(data);
+        } else {
+          console.error("Failed to fetch inquiries");
+        }
+      } catch (error) {
+        console.error("Error fetching inquiries:", error);
+      }
+    };
+
+    fetchCourseInquiries();
   }, []);
 
   const handleLogout = () => {
@@ -103,7 +95,7 @@ const AdminCourseInquiries = () => {
                         </span>
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-500">
-                        {new Date(inq.submittedAt).toLocaleString()}
+                        {new Date(inq.createdAt).toLocaleString()}
                       </td>
                     </tr>
                   ))}
@@ -137,7 +129,7 @@ const AdminCourseInquiries = () => {
 
                   <p className="text-xs text-gray-500">
                     Submitted:{" "}
-                    {new Date(inq.submittedAt).toLocaleString()}
+                    {new Date(inq.createdAt).toLocaleString()}
                   </p>
                 </div>
               ))}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminSidebar from "./AdminSidebar";
+import BASE_URL from "../BASEURL";
 
 const AdminInternshipList = () => {
   const [applications, setApplications] = useState([]);
@@ -14,34 +15,21 @@ const AdminInternshipList = () => {
   }, [navigate]);
 
   useEffect(() => {
-    const apps = JSON.parse(localStorage.getItem("internshipApplications") || "[]");
-    if (apps.length === 0) {
-      const staticData = [
-        {
-          id: 1,
-          name: "John Doe",
-          email: "john@example.com",
-          phone: "+91 9876543210",
-          internship: "Web Development Internship",
-          experience: "Beginner",
-          message: "Excited to learn!",
-          submittedAt: new Date().toISOString(),
-        },
-        {
-          id: 2,
-          name: "Jane Smith",
-          email: "jane@example.com",
-          phone: "+91 9876543211",
-          internship: "Python Development Internship",
-          experience: "Intermediate",
-          message: "Looking forward to the opportunity.",
-          submittedAt: new Date(Date.now() - 86400000).toISOString(),
-        },
-      ];
-      setApplications(staticData);
-    } else {
-      setApplications(apps);
-    }
+    const fetchInternshipApplications = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/api/internship-inquiries`);
+        if (response.ok) {
+          const data = await response.json();
+          setApplications(data);
+        } else {
+          console.error("Failed to fetch applications");
+        }
+      } catch (error) {
+        console.error("Error fetching applications:", error);
+      }
+    };
+
+    fetchInternshipApplications();
   }, []);
 
   const handleLogout = () => {
@@ -109,7 +97,7 @@ const AdminInternshipList = () => {
                         </span>
                       </td>
                       <td className="px-6 py-4 text-gray-500 text-sm">
-                        {new Date(app.submittedAt).toLocaleString()}
+                        {new Date(app.createdAt).toLocaleString()}
                       </td>
                     </tr>
                   ))}
@@ -141,7 +129,7 @@ const AdminInternshipList = () => {
                     <strong>Internship:</strong> {app.internship}
                   </p>
                   <p className="text-xs text-gray-500">
-                    Submitted: {new Date(app.submittedAt).toLocaleString()}
+                    Submitted: {new Date(app.createdAt).toLocaleString()}
                   </p>
                 </div>
               ))}

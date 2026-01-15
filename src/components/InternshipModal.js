@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import BASE_URL from "../BASEURL";
 
 export default function InternshipModal({ internship, isOpen, onClose }) {
     const [formData, setFormData] = useState({
@@ -23,37 +24,61 @@ export default function InternshipModal({ internship, isOpen, onClose }) {
     ];
 
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        let { name, value } = e.target;
+        
+        // For phone field, only allow digits and limit to 10
+        if (name === 'phone') {
+            value = value.replace(/[^0-9]/g, '').slice(0, 10);
+        }
+        
+        setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        setTimeout(() => {
-            setSubmittedData(formData);
-            setShowSuccess(true);
+        try {
+            const response = await fetch(`${BASE_URL}/api/internship-inquiries`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    ...formData,
+                    createdAt: new Date().toISOString()
+                })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setSubmittedData(formData);
+                setShowSuccess(true);
+                setIsSubmitting(false);
+
+                setTimeout(() => {
+                    onClose();
+                    setShowSuccess(false);
+                    setFormData({
+                        name: "",
+                        email: "",
+                        phone: "",
+                        internship: internship?.title || "",
+                        experience: "",
+                        message: ""
+                    });
+                    setSubmittedData(null);
+                }, 2500);
+            } else {
+                console.error('Failed to submit application');
+                setIsSubmitting(false);
+                alert('Failed to submit application. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error submitting application:', error);
             setIsSubmitting(false);
-
-            // Save to localStorage
-            const applications = JSON.parse(localStorage.getItem('internshipApplications') || '[]');
-            applications.push({ ...formData, id: Date.now(), submittedAt: new Date().toISOString() });
-            localStorage.setItem('internshipApplications', JSON.stringify(applications));
-
-            setTimeout(() => {
-                onClose();
-                setShowSuccess(false);
-                setFormData({
-                    name: "",
-                    email: "",
-                    phone: "",
-                    internship: internship?.title || "",
-                    experience: "",
-                    message: ""
-                });
-                setSubmittedData(null);
-            }, 2500);
-        }, 1500);
+            alert('Error submitting application. Please check your connection.');
+        }
     };
 
     if (!isOpen) return null;
@@ -147,6 +172,8 @@ export default function InternshipModal({ internship, isOpen, onClose }) {
                                     onChange={handleChange}
                                     placeholder="10-digit mobile number"
                                     pattern="[0-9]{10}"
+                                    maxLength="10"
+                                    inputMode="numeric"
                                     required
                                 />
 

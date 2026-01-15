@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import BASE_URL from "../BASEURL";
 
 export default function EnrollmentModal({ course, isOpen, onClose, onSuccess }) {
   const [formData, setFormData] = useState({
@@ -22,28 +23,52 @@ export default function EnrollmentModal({ course, isOpen, onClose, onSuccess }) 
   ];
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    let { name, value } = e.target;
+    
+    // For phone field, only allow digits and limit to 10
+    if (name === 'phone') {
+      value = value.replace(/[^0-9]/g, '').slice(0, 10);
+    }
+    
+    setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    setTimeout(() => {
-      setSubmittedData(formData);
-      setShowSuccess(true);
+    try {
+      const response = await fetch(`${BASE_URL}/api/course-inquiries`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          submittedAt: new Date().toISOString()
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setSubmittedData(formData);
+        setShowSuccess(true);
+        setIsSubmitting(false);
+
+        setTimeout(() => {
+          if (onSuccess) onSuccess();
+          handleClose();
+        }, 2500);
+      } else {
+        console.error('Failed to submit enrollment');
+        setIsSubmitting(false);
+        alert('Failed to submit enrollment. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting enrollment:', error);
       setIsSubmitting(false);
-
-      // Save to localStorage
-      const inquiries = JSON.parse(localStorage.getItem('courseInquiries') || '[]');
-      inquiries.push({ ...formData, id: Date.now(), submittedAt: new Date().toISOString() });
-      localStorage.setItem('courseInquiries', JSON.stringify(inquiries));
-
-      setTimeout(() => {
-        if (onSuccess) onSuccess();
-        handleClose();
-      }, 2500);
-    }, 1500);
+      alert('Error submitting enrollment. Please check your connection.');
+    }
   };
 
   const handleClose = () => {
@@ -193,8 +218,9 @@ export default function EnrollmentModal({ course, isOpen, onClose, onSuccess }) 
                         value={formData.phone}
                         onChange={handleChange}
                         placeholder="10-digit mobile number"
-                        pattern="[0-9]{0,10}"
+                        pattern="[0-9]{10}"
                         maxLength="10"
+                        inputMode="numeric"
                         icon="📱"
                         required
                       />

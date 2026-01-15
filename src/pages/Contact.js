@@ -2,38 +2,62 @@ import React, { useState } from "react";
 import PageHeader from "../components/PageHeader";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import BASE_URL from "../BASEURL";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    course: "",
     message: ""
   });
 
   const handleChange = (e) => {
+    let { name, value } = e.target;
+    
+    // For phone field, only allow digits and limit to 10
+    if (name === 'phone') {
+      value = value.replace(/[^0-9]/g, '').slice(0, 10);
+    }
+    
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Save to localStorage
-    const inquiries = JSON.parse(localStorage.getItem('generalInquiries') || '[]');
-    inquiries.push({ ...formData, id: Date.now(), submittedAt: new Date().toISOString() });
-    localStorage.setItem('generalInquiries', JSON.stringify(inquiries));
-    // Handle form submission here
-    alert("Thank you for contacting us! We will get back to you soon.");
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      course: "",
-      message: ""
-    });
+    
+    try {
+      const response = await fetch(`${BASE_URL}/api/inquiries`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          createdAt: new Date().toISOString()
+        })
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        alert("Thank you for contacting us! We will get back to you soon.");
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          message: ""
+        });
+      } else {
+        console.error('Failed to submit inquiry');
+        alert('Failed to submit your message. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting inquiry:', error);
+      alert('Error submitting your message. Please check your connection.');
+    }
   };
 
   const contactInfo = [
@@ -127,9 +151,13 @@ export default function Contact() {
                     value={formData.phone}
                     onChange={handleChange}
                     required
+                    pattern="[0-9]{10}"
+                    maxLength="10"
+                    inputMode="numeric"
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-secondary-500 focus:border-transparent transition-all"
-                    placeholder="Enter your phone number"
+                    placeholder="Enter your 10-digit phone number"
                   />
+                  <p className="text-xs text-gray-500 mt-1">Enter exactly 10 digits</p>
                 </div>
 
                
