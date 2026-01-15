@@ -89,7 +89,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+      <div className={`md:hidden overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
         }`}>
         <nav className="bg-gradient-to-b from-dark-900/98 to-dark-800/98 backdrop-blur-md px-5 py-6 flex flex-col gap-4 border-t border-white/10">
           {navItems.map((item) => (

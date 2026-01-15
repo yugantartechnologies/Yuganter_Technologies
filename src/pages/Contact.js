@@ -78,8 +78,8 @@ export default function Contact() {
         </svg>
       ),
       title: "Phone",
-      content: "+91 6355582605",
-      link: "tel:+916355582605"
+      content: "+91 9054372690",
+      link: "tel:+919054372690"
     },
     {
       icon: (
@@ -241,7 +241,7 @@ export default function Contact() {
                   </div>
                 </div>
                 <a
-                  href="tel:+916355582605"
+                  href="tel:+919054372690"
                   className="block w-full px-6 py-3 bg-white text-secondary-600 font-semibold rounded-xl hover:bg-gray-100 transition-all duration-300 text-center transform hover:scale-105"
                 >
                   Call Now
