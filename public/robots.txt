@@ -2,4 +2,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://yugantartechnologies.github.io/Yuganter_Technologies/sitemap.xml
+Sitemap: https://www.yugantartechnologies.com/sitemap.xml
