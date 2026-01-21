@@ -2,28 +2,17 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import BASE_URL from "../BASEURL";
 
-export default function EnrollmentModal({ course, isOpen, onClose, onSuccess }) {
+export default function ServiceBookingModal({ service, isOpen, onClose, onSuccess }) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
-    course: course?.title || ""
+    service: service?.title || "",
+    message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [submittedData, setSubmittedData] = useState(null);
-
-  const courses = [
-    "Full Stack Development (MERN)",
-    "Python Development",
-    "Python With Django",
-    "Java Full Stack",
-    "UI/UX Design",
-    "Data Science & AI/ML",
-    "Mobile App Development",
-    "Digital Marketing",
-    "Cyber Security"
-    ];
 
   const handleChange = (e) => {
     let { name, value } = e.target;
@@ -41,7 +30,7 @@ export default function EnrollmentModal({ course, isOpen, onClose, onSuccess }) 
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(`${BASE_URL}/api/course-inquiries`, {
+      const response = await fetch(`${BASE_URL}/api/service-bookings`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -63,20 +52,20 @@ export default function EnrollmentModal({ course, isOpen, onClose, onSuccess }) 
           handleClose();
         }, 2500);
       } else {
-        console.error('Failed to submit enrollment');
+        console.error('Failed to submit service booking');
         setIsSubmitting(false);
-        alert('Failed to submit enrollment. Please try again.');
+        alert('Failed to submit service booking. Please try again.');
       }
     } catch (error) {
-      console.error('Error submitting enrollment:', error);
+      console.error('Error submitting service booking:', error);
       setIsSubmitting(false);
-      alert('Error submitting enrollment. Please check your connection.');
+      alert('Error submitting service booking. Please check your connection.');
     }
   };
 
   const handleClose = () => {
     setShowSuccess(false);
-    setFormData({ name: "", email: "", phone: "", course: course?.title || "" });
+    setFormData({ name: "", email: "", phone: "", service: service?.title || "", message: "" });
     setSubmittedData(null);
     onClose();
   };
@@ -141,7 +130,7 @@ export default function EnrollmentModal({ course, isOpen, onClose, onSuccess }) 
                   </motion.div>
 
                   <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                    Enrollment Confirmed!
+                    Service Booking Confirmed!
                   </h2>
 
                   <p className="text-gray-600 mb-2 text-lg">
@@ -161,9 +150,9 @@ export default function EnrollmentModal({ course, isOpen, onClose, onSuccess }) 
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
                   >
-                    <p className="text-sm text-gray-500 mb-2">Selected Course</p>
+                    <p className="text-sm text-gray-500 mb-2">Selected Service</p>
                     <p className="font-bold text-xl text-gray-800">
-                      {submittedData?.course}
+                      {submittedData?.service}
                     </p>
                   </motion.div>
                 </motion.div>
@@ -179,11 +168,11 @@ export default function EnrollmentModal({ course, isOpen, onClose, onSuccess }) 
                         animate={{ scale: 1 }}
                         transition={{ delay: 0.3, type: "spring" }}
                       >
-                        {course?.icon || "🎓"}
+                        {service?.icon || "🔧"}
                       </motion.div>
                       <div>
-                        <h2 className="text-2xl font-bold mb-2">Course Enrollment</h2>
-                        <p className="text-primary-100">Join our premium learning program</p>
+                        <h2 className="text-2xl font-bold mb-2">Service Booking</h2>
+                        <p className="text-primary-100">Book our premium IT services</p>
                       </div>
                     </div>
                     <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-white/10 rounded-full blur-xl"></div>
@@ -230,28 +219,26 @@ export default function EnrollmentModal({ course, isOpen, onClose, onSuccess }) 
 
                       <div>
                         <label className="block text-sm font-semibold text-gray-700 mb-3">
-                          Select Course
+                          Selected Service
                         </label>
-                        <div className="relative">
-                          <select
-                            name="course"
-                            value={formData.course}
-                            onChange={handleChange}
-                            className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 pr-10 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 appearance-none bg-white"
-                            required
-                          >
-                            <option value="" selected>Choose your course</option>
-                            {courses.map((courseOption, index) => (
-                              <option key={index} value={courseOption}>
-                                {courseOption}
-                              </option>
-                            ))}
-                          </select>
-                          <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none">
-                            ▼
-                          </div>
+                        <div className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 bg-gray-50 text-gray-700 font-medium">
+                          {service?.title || "Service"}
                         </div>
                       </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-3">
+                        Additional Requirements (Optional)
+                      </label>
+                      <textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        placeholder="Tell us more about your requirements..."
+                        rows="4"
+                        className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 transition-all resize-none"
+                      />
                     </div>
 
                     {/* CTA */}
@@ -273,7 +260,7 @@ export default function EnrollmentModal({ course, isOpen, onClose, onSuccess }) 
                         </>
                       ) : (
                         <>
-                          🚀 Enroll Now
+                          🚀 Book Service
                         </>
                       )}
                     </motion.button>

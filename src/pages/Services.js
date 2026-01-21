@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
 import ServiceCard from "../components/ServiceCard";
+import ServiceBookingModal from "../components/ServiceBookingModal";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
 export default function Services() {
+  const [bookingModal, setBookingModal] = useState({ isOpen: false, service: null });
+
   useEffect(() => {
     document.title = 'IT Services Ahmedabad - YugAnter Technologies';
     const metaDescription = document.querySelector('meta[name="description"]');
@@ -13,79 +16,132 @@ export default function Services() {
       metaDescription.setAttribute('content', 'Best IT services in Navrangpura Ahmedabad - Web development, mobile app development, software solutions, digital marketing, and IT consultancy for businesses.');
     }
   }, []);
+
+  const handleBookService = (service) => {
+    setBookingModal({ isOpen: true, service });
+  };
+
+  const handleCloseBookingModal = () => {
+    setBookingModal({ isOpen: false, service: null });
+  };
   const services = [
-    {
-      title: "Web Development Company Ahmedabad",
-      description: "Professional web development services including custom website design, e-commerce development, and responsive web solutions for businesses in Ahmedabad.",
-      icon: "🌐",
-      features: [
-        "Custom web design",
-        "E-commerce development",
-        "Responsive websites",
-        "CMS integration",
-        "SEO optimization"
-      ]
-    },
-    {
-      title: "Mobile App Development Ahmedabad",
-      description: "Expert mobile app development for iOS and Android platforms. Create innovative mobile solutions for your business needs.",
-      icon: "📱",
-      features: [
-        "iOS & Android apps",
-        "Cross-platform development",
-        "UI/UX design",
-        "App testing & deployment",
-        "Maintenance & support"
-      ]
-    },
-    {
-      title: "Software Solutions for Businesses",
-      description: "Custom software development services tailored to your business requirements. ERP, CRM, and automation solutions.",
-      icon: "💻",
-      features: [
-        "Custom software development",
-        "ERP solutions",
-        "Business automation",
-        "Cloud solutions",
-        "AI & IoT integration"
-      ]
-    },
-    {
-      title: "Digital Marketing Services Ahmedabad",
-      description: "Comprehensive digital marketing solutions including SEO, social media marketing, and online advertising to grow your business.",
-      icon: "📈",
-      features: [
-        "SEO & SEM",
-        "Social media marketing",
-        "Content marketing",
-        "PPC campaigns",
-        "Analytics & reporting"
-      ]
-    },
-    {
-      title: "IT Consultancy Ahmedabad",
-      description: "Expert IT consulting services to help businesses leverage technology for growth and efficiency.",
-      icon: "🧠",
-      features: [
-        "Technology consulting",
-        "System analysis",
-        "IT strategy planning",
-        "Digital transformation",
-        "Tech support"
-      ]
-    },
-    {
-      title: "IT Training & Education",
-      description: "Comprehensive training programs in cutting-edge technologies with hands-on projects and industry mentorship.",
-      icon: "🎓",
-      features: [
-        "Industry-expert trainers",
-        "Live project-based learning",
-        "Certification programs",
-        "Career guidance & counseling",
-        "Placement assistance"
-      ]
-    }
+  {
+    title: "Web Application Development",
+    description:
+      "We build scalable, secure, and high-performance web applications tailored to your business needs using the latest technologies.",
+    icon: "🌐",
+    features: [
+      "Custom web applications",
+      "Secure & scalable architecture",
+      "Admin & user dashboards",
+      "Cloud deployment",
+      "Maintenance & support",
+    ],
+  },
+  {
+    title: "Mobile Application Development",
+    description:
+      "End-to-end mobile app development for Android and iOS platforms delivering smooth UI/UX and robust, secure performance solutions",
+    icon: "📱",
+    features: [
+      "Android & iOS apps",
+      "Flutter / React Native",
+      "UI/UX design",
+      "App testing & deployment",
+      "Ongoing support",
+    ],
+  },
+  {
+    title: "Game Development",
+    description:
+      "Interactive and engaging game development solutions for mobile and web platforms using modern, powerful game engines and technologies.",
+    icon: "🎮",
+    features: [
+      "2D & 3D game development",
+      "Unity & Web-based games",
+      "Game UI/UX design",
+      "Multiplayer integration",
+      "Game testing & optimization",
+    ],
+  },
+  {
+    title: "E-Commerce Development",
+    description:
+      "Custom e-commerce solutions to help businesses sell products online with secure payment and easy management.",
+    icon: "🛒",
+    features: [
+      "Custom e-commerce websites",
+      "Payment gateway integration",
+      "Product & order management",
+      "Cart & checkout system",
+      "SEO-friendly store",
+    ],
+  },
+  {
+    title: "Internship & Training Programs",
+    description:
+      "Industry-oriented internship and training programs with live projects and placement assistance.",
+    icon: "🎓",
+    features: [
+      "Live project training",
+      "Industry expert mentors",
+      "Internship certification",
+      "Career guidance",
+      "Placement assistance",
+    ],
+  },
+  {
+    title: "CRM Development",
+    description:
+      "Custom CRM solutions to manage customers, sales, leads, and business processes efficiently and securely with scalable automation.",
+    icon: "📊",
+    features: [
+      "Lead & customer management",
+      "Sales tracking",
+      "Reports & analytics",
+      "Role-based access",
+      "Custom workflow automation",
+    ],
+  },
+  {
+    title: "Web ERP Development",
+    description:
+      "Complete ERP systems to manage business operations such as finance, HR, inventory, and sales from one platform.",
+    icon: "🏢",
+    features: [
+      "Inventory management",
+      "HR & payroll system",
+      "Accounting & billing",
+      "Role-based dashboards",
+      "Custom ERP modules",
+    ],
+  },
+  {
+    title: "API Development & Integration",
+    description:
+      "Secure and scalable API development for seamless integration between applications and third-party services.",
+    icon: "🔗",
+    features: [
+      "REST & GraphQL APIs",
+      "Third-party integrations",
+      "Authentication & security",
+      "High performance APIs",
+      "API documentation",
+    ],
+  },
+  {
+    title: "Field Force Management System",
+    description:
+      "Smart field force management solutions to track, manage, and optimize your on-field workforce operations.",
+    icon: "📍",
+    features: [
+      "Live location tracking",
+      "Task & attendance management",
+      "Reports & analytics",
+      "Mobile app integration",
+      "Real-time notifications",
+    ],
+  },
   ];
 
   return (
@@ -111,7 +167,7 @@ export default function Services() {
           {/* Services Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <ServiceCard key={index} service={service} />
+              <ServiceCard key={index} service={service} onBook={handleBookService} />
             ))}
           </div>
 
@@ -170,6 +226,12 @@ export default function Services() {
           </div>
         </div>
       </main>
+
+      <ServiceBookingModal 
+        service={bookingModal.service} 
+        isOpen={bookingModal.isOpen} 
+        onClose={handleCloseBookingModal} 
+      />
 
       <Footer />
     </div>

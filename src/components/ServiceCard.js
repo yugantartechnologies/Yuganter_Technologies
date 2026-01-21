@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ServiceCard({ service }) {
+export default function ServiceCard({ service, onBook }) {
   return (
     <div className="group bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:-translate-y-2 hover:border-secondary-200 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-secondary-50/0 to-primary-50/0 group-hover:from-secondary-50/50 group-hover:to-primary-50/50 transition-all duration-300"></div>
@@ -22,7 +22,7 @@ export default function ServiceCard({ service }) {
         </p>
 
         {/* Features List */}
-        <ul className="space-y-2">
+        <ul className="space-y-2 mb-6">
           {service.features.map((feature, idx) => (
             <li key={idx} className="flex items-start gap-2 text-sm text-gray-600">
               <svg className="w-5 h-5 text-secondary-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
@@ -32,6 +32,14 @@ export default function ServiceCard({ service }) {
             </li>
           ))}
         </ul>
+
+        {/* Book Now Button */}
+        <button
+          onClick={() => onBook(service)}
+          className="w-full py-3 px-6 bg-gradient-to-r from-secondary-500 to-primary-500 text-white font-semibold rounded-xl hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+        >
+          Book Now
+        </button>
       </div>
     </div>
   );

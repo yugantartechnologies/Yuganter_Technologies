@@ -21,6 +21,7 @@ import AdminDashboard from './admin/AdminDashboard';
 import AdminInternshipList from './admin/AdminInternshipList';
 import AdminCourseInquiries from './admin/AdminCourseInquiries';
 import AdminGeneralInquiries from './admin/AdminGeneralInquiries';
+import AdminServiceInquiries from './admin/AdminServiceInquiries';
 import FloatingEnrollButton from './components/FloatingEnrollButton';
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
           <Route path="/admin/course-inquiries" element={<AdminCourseInquiries />} />
           <Route path="/admin/internships" element={<AdminInternshipList />} />
           <Route path="/admin/general-inquiries" element={<AdminGeneralInquiries />} />
+          <Route path="/admin/service-inquiries" element={<AdminServiceInquiries />} />
         </Routes>
         <FloatingEnrollButton />
       </div>

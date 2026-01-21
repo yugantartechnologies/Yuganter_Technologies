@@ -48,6 +48,10 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen, onLogout }) 
             <i className="fa-solid fa-users mr-2"></i> Internship Applications
           </NavLink>
 
+          <NavLink to="/admin/service-inquiries" className={linkClass}>
+            <i className="fa-solid fa-comments mr-2"></i> Service Inquiries
+          </NavLink>
+
           <button onClick={() => { if (window.confirm('Are you sure you want to logout?')) onLogout(); }} className={linkClass}>
             <i className="fa-solid fa-right-from-bracket mr-2"></i> Logout
           </button>
