@@ -166,13 +166,13 @@ const AdminAttendance = () => {
                 {attendanceRecords.map((record, index) => (
                   <tr key={index}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {record.name}
+                      {record.studentName}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {record.id}
+                      {record.studentId}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {formatDate(record.timestamp)}
+                      {formatDate(record.qrTimestamp)}
                     </td>
                   </tr>
                 ))}

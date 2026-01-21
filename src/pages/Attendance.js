@@ -65,9 +65,8 @@ const Attendance = () => {
       const studentId = parts[2];
       
       const attendanceRecord = {
-        name: studentName,
-        id: studentId,
-        timestamp: new Date().toISOString(),
+        studentName: studentName,
+        studentId: studentId,
         qrTimestamp: parts[3],
       };
 
