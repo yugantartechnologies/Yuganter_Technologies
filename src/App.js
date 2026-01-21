@@ -22,6 +22,8 @@ import AdminInternshipList from './admin/AdminInternshipList';
 import AdminCourseInquiries from './admin/AdminCourseInquiries';
 import AdminGeneralInquiries from './admin/AdminGeneralInquiries';
 import AdminServiceInquiries from './admin/AdminServiceInquiries';
+import Attendance from './pages/Attendance';
+import AdminAttendance from './admin/AdminAttendance';
 import FloatingEnrollButton from './components/FloatingEnrollButton';
 
 function App() {
@@ -50,6 +52,8 @@ function App() {
           <Route path="/admin/internships" element={<AdminInternshipList />} />
           <Route path="/admin/general-inquiries" element={<AdminGeneralInquiries />} />
           <Route path="/admin/service-inquiries" element={<AdminServiceInquiries />} />
+          <Route path="/attendance" element={<Attendance />} />
+          <Route path="/admin/attendance" element={<AdminAttendance />} />
         </Routes>
         <FloatingEnrollButton />
       </div>
