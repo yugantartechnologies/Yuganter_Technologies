@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Webcam from 'react-webcam';
 import QrScanner from 'qr-scanner';
+import Navbar from '../components/Navbar';
 import { attendanceAPI } from '../services/attendanceAPI';
 
 const Attendance = () => {
@@ -63,14 +64,27 @@ const Attendance = () => {
     if (parts.length >= 4 && parts[0] === 'ATTENDANCE') {
       const studentName = parts[1];
       const studentId = parts[2];
+      const qrTimestamp = parts[3];
       
-      const attendanceRecord = {
-        studentName: studentName,
-        studentId: studentId,
-        qrTimestamp: parts[3],
-      };
-
       try {
+        // Check if attendance already marked for this student and QR
+        const existingAttendances = await attendanceAPI.getAll();
+        const alreadyMarked = existingAttendances.some(att => 
+          att.studentId === studentId && att.qrTimestamp === qrTimestamp
+        );
+        
+        if (alreadyMarked) {
+          alert('Attendance already marked for this session!');
+          stopScanning();
+          return;
+        }
+        
+        const attendanceRecord = {
+          studentName: studentName,
+          studentId: studentId,
+          qrTimestamp: qrTimestamp,
+        };
+
         await attendanceAPI.create(attendanceRecord);
         setScannedData({ name: studentName, id: studentId });
         setAttendanceMarked(true);
@@ -96,7 +110,9 @@ const Attendance = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <>
+    <Navbar />
+    <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 mt-20">
       <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
         <h2 className="text-2xl font-bold text-center mb-6">Student Attendance</h2>
         
@@ -149,6 +165,7 @@ const Attendance = () => {
         )}
       </div>
     </div>
+    </>
   );
 };
 
