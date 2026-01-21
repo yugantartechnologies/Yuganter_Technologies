@@ -24,6 +24,7 @@ import AdminGeneralInquiries from './admin/AdminGeneralInquiries';
 import AdminServiceInquiries from './admin/AdminServiceInquiries';
 import Attendance from './pages/Attendance';
 import AdminAttendance from './admin/AdminAttendance';
+import AdminStudents from './admin/AdminStudents';
 import FloatingEnrollButton from './components/FloatingEnrollButton';
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
           <Route path="/admin/service-inquiries" element={<AdminServiceInquiries />} />
           <Route path="/attendance" element={<Attendance />} />
           <Route path="/admin/attendance" element={<AdminAttendance />} />
+          <Route path="/admin/students" element={<AdminStudents />} />
         </Routes>
         <FloatingEnrollButton />
       </div>

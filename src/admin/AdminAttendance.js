@@ -1,25 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AdminSidebar from './AdminSidebar';
 import QRCode from 'qrcode';
+import { studentsAPI } from '../services/studentsAPI';
 
 const AdminAttendance = () => {
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [attendanceRecords, setAttendanceRecords] = useState([]);
-  const [studentName, setStudentName] = useState('');
-  const [studentId, setStudentId] = useState('');
+  const [students, setStudents] = useState([]);
+  const [selectedStudent, setSelectedStudent] = useState('');
   const [qrCodeUrl, setQrCodeUrl] = useState('');
+  const expectedQrData = useRef('');
 
   useEffect(() => {
     if (!localStorage.getItem('adminLoggedIn')) {
       navigate('/admin/login');
     } else {
-      // Load attendance records from localStorage
-      const records = JSON.parse(localStorage.getItem('attendance') || '[]');
-      setAttendanceRecords(records);
+      loadData();
     }
   }, [navigate]);
+
+  const loadData = async () => {
+    try {
+      // Load attendance records
+      const records = JSON.parse(localStorage.getItem('attendance') || '[]');
+      setAttendanceRecords(records);
+      
+      // Load students using API
+      const response = await studentsAPI.getAll();
+      setStudents(response);
+    } catch (err) {
+      console.error('Error loading data:', err);
+    }
+  };
 
   const handleLogout = () => {
     localStorage.removeItem('adminLoggedIn');
@@ -27,11 +41,19 @@ const AdminAttendance = () => {
   };
 
   const generateQRCode = async () => {
-    if (!studentName.trim() || !studentId.trim()) {
-      alert('Please enter both student name and ID.');
+    if (!selectedStudent) {
+      alert('Please select a student.');
       return;
     }
-    const data = `ATTENDANCE:${studentName}:${studentId}:${new Date().toISOString()}`;
+    
+    const student = students.find(s => s._id === selectedStudent);
+    if (!student) {
+      alert('Selected student not found.');
+      return;
+    }
+    
+    const data = `ATTENDANCE:${student.name}:${student.rollNo}:${new Date().toISOString()}`;
+    expectedQrData.current = data;
     try {
       const url = await QRCode.toDataURL(data);
       setQrCodeUrl(url);
@@ -47,8 +69,7 @@ const AdminAttendance = () => {
 
   const clearQR = () => {
     setQrCodeUrl('');
-    setStudentName('');
-    setStudentId('');
+    setSelectedStudent('');
   };
 
   return (
@@ -70,36 +91,30 @@ const AdminAttendance = () => {
         {/* QR Code Generation Section */}
         <div className="bg-white shadow-md rounded-lg p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4">Generate QR Code for Student</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Student Name
-              </label>
-              <input
-                type="text"
-                value={studentName}
-                onChange={(e) => setStudentName(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                placeholder="Enter student name"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Student ID
-              </label>
-              <input
-                type="text"
-                value={studentId}
-                onChange={(e) => setStudentId(e.target.value)}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                placeholder="Enter student ID"
-              />
-            </div>
+          
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Select Student
+            </label>
+            <select
+              value={selectedStudent}
+              onChange={(e) => setSelectedStudent(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            >
+              <option value="">Choose a student...</option>
+              {students.map((student) => (
+                <option key={student._id} value={student._id}>
+                  {student.rollNo} - {student.name} ({student.course})
+                </option>
+              ))}
+            </select>
           </div>
+          
           <div className="flex gap-2 mb-4">
             <button
               onClick={generateQRCode}
-              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+              disabled={!selectedStudent}
+              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-gray-400 disabled:cursor-not-allowed"
             >
               Generate QR Code
             </button>
@@ -112,9 +127,13 @@ const AdminAttendance = () => {
               </button>
             )}
           </div>
+          
           {qrCodeUrl && (
             <div className="text-center">
-              <p className="text-sm text-gray-600 mb-2">QR Code for {studentName} (ID: {studentId})</p>
+              <p className="text-sm text-gray-600 mb-2">
+                QR Code for {students.find(s => s._id === selectedStudent)?.name} 
+                (Roll No: {students.find(s => s._id === selectedStudent)?.rollNo})
+              </p>
               <img src={qrCodeUrl} alt="QR Code" className="mx-auto border-2 border-gray-300 rounded" />
               <p className="text-xs text-gray-500 mt-2">Students can scan this QR code to mark their attendance</p>
             </div>
