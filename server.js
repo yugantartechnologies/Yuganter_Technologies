@@ -13,6 +13,9 @@ let students = [
   { id: 2, name: 'Jane Smith', rollNo: '002', course: 'Data Science' },
 ];
 
+// In-memory storage for attendances
+let attendances = [];
+
 // GET /api/students - Get all students
 app.get('/api/students', (req, res) => {
   res.json({ status: 200, data: students });
@@ -50,6 +53,22 @@ app.delete('/api/students/:id', (req, res) => {
   } else {
     res.status(404).json({ status: 404, message: 'Student not found' });
   }
+});
+
+// GET /api/attendances - Get all attendances
+app.get('/api/attendances', (req, res) => {
+  res.json(attendances);
+});
+
+// POST /api/attendances - Add a new attendance
+app.post('/api/attendances', (req, res) => {
+  const newAttendance = {
+    _id: Date.now().toString(), // Simple ID generation
+    ...req.body,
+    createdAt: new Date().toISOString(),
+  };
+  attendances.push(newAttendance);
+  res.json(newAttendance);
 });
 
 app.listen(port, () => {

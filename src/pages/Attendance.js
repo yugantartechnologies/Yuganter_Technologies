@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import Webcam from 'react-webcam';
 import QrScanner from 'qr-scanner';
+import { attendanceAPI } from '../services/attendanceAPI';
 
 const Attendance = () => {
   const [isScanning, setIsScanning] = useState(false);
@@ -56,7 +57,7 @@ const Attendance = () => {
     setIsScanning(false);
   };
 
-  const markAttendance = (qrData) => {
+  const markAttendance = async (qrData) => {
     // Parse QR data: ATTENDANCE:name:id:timestamp
     const parts = qrData.split(':');
     if (parts.length >= 4 && parts[0] === 'ATTENDANCE') {
@@ -70,15 +71,17 @@ const Attendance = () => {
         qrTimestamp: parts[3],
       };
 
-      // Store in localStorage (in real app, send to backend)
-      const existingRecords = JSON.parse(localStorage.getItem('attendance') || '[]');
-      existingRecords.push(attendanceRecord);
-      localStorage.setItem('attendance', JSON.stringify(existingRecords));
-
-      setScannedData({ name: studentName, id: studentId });
-      setAttendanceMarked(true);
-      stopScanning();
-      alert('Attendance marked successfully!');
+      try {
+        await attendanceAPI.create(attendanceRecord);
+        setScannedData({ name: studentName, id: studentId });
+        setAttendanceMarked(true);
+        stopScanning();
+        alert('Attendance marked successfully!');
+      } catch (error) {
+        console.error('Error marking attendance:', error);
+        alert('Error marking attendance. Please try again.');
+        stopScanning();
+      }
     } else {
       alert('Invalid QR code. Please scan a valid attendance QR code.');
       stopScanning();

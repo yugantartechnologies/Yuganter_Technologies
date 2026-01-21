@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import AdminSidebar from './AdminSidebar';
 import QRCode from 'qrcode';
 import { studentsAPI } from '../services/studentsAPI';
+import { attendanceAPI } from '../services/attendanceAPI';
 
 const AdminAttendance = () => {
   const navigate = useNavigate();
@@ -23,13 +24,13 @@ const AdminAttendance = () => {
 
   const loadData = async () => {
     try {
-      // Load attendance records
-      const records = JSON.parse(localStorage.getItem('attendance') || '[]');
-      setAttendanceRecords(records);
+      // Load attendance records from API
+      const attendanceResponse = await attendanceAPI.getAll();
+      setAttendanceRecords(attendanceResponse);
       
       // Load students using API
-      const response = await studentsAPI.getAll();
-      setStudents(response);
+      const studentsResponse = await studentsAPI.getAll();
+      setStudents(studentsResponse);
     } catch (err) {
       console.error('Error loading data:', err);
     }
