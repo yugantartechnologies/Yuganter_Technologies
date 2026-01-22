@@ -51,21 +51,33 @@ const Attendance = () => {
 
     const [_, studentName, studentId, qrTimestamp] = parts;
 
-    const existing = await attendanceAPI.getAll();
-    const alreadyMarked = existing.some(
-      (a) => a.studentId === studentId && a.qrTimestamp === qrTimestamp
-    );
+    try {
+      const existing = await attendanceAPI.getAll();
+      const alreadyMarked = existing.some(
+        (a) => a.studentId === studentId && a.qrTimestamp === qrTimestamp
+      );
 
-    if (alreadyMarked) {
-      alert('Attendance already marked!');
+      if (alreadyMarked) {
+        alert('Attendance already marked!');
+        stopScanning();
+        return;
+      }
+    } catch (error) {
+      alert('Error checking attendance: ' + error.message);
       stopScanning();
       return;
     }
 
-    await attendanceAPI.create({ studentName, studentId, qrTimestamp });
-    setScannedData({ name: studentName, id: studentId });
-    setAttendanceMarked(true);
-    stopScanning();
+    try {
+      await attendanceAPI.create({ studentName, studentId, qrTimestamp });
+      setScannedData({ name: studentName, id: studentId });
+      setAttendanceMarked(true);
+      stopScanning();
+    } catch (error) {
+      alert('Error marking attendance: ' + error.message);
+      stopScanning();
+      return;
+    }
   };
 
   useEffect(() => {
