@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styles/StudentRegistration.css";
 import BASE_URL from "../BASEURL.js";
+import Navbar from "./Navbar.js";
 
 const InternshipRegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -176,6 +177,8 @@ const InternshipRegistrationForm = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="registration-container">
       <div className="registration-wrapper">
         <div className="form-header">
@@ -360,6 +363,7 @@ const InternshipRegistrationForm = () => {
                   <option value="mca">MCA</option>
                   <option value="bsc">B.Sc</option>
                   <option value="msc">M.Sc</option>
+                  <option value="diploma">DIPLOMA</option>
                 </select>
                 {errors.course && <span className="error-text">{errors.course}</span>}
               </div>
@@ -532,6 +536,7 @@ const InternshipRegistrationForm = () => {
         </form>
       </div>
     </div>
+    </>
   );
 };
 
