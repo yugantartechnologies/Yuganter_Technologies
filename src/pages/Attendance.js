@@ -3,12 +3,14 @@ import Webcam from 'react-webcam';
 import QrScanner from 'qr-scanner';
 import Navbar from '../components/Navbar';
 import { attendanceAPI } from '../services/attendanceAPI';
+import { Link } from 'react-router-dom';
 
 const Attendance = () => {
   const [isScanning, setIsScanning] = useState(false);
   const [attendanceMarked, setAttendanceMarked] = useState(false);
   const [scannedData, setScannedData] = useState(null);
   const [webcamReady, setWebcamReady] = useState(false);
+
   const webcamRef = useRef(null);
   const qrScannerRef = useRef(null);
 
@@ -19,38 +21,6 @@ const Attendance = () => {
     setWebcamReady(false);
   };
 
-  const onWebcamReady = () => {
-    setWebcamReady(true);
-    if (isScanning && webcamRef.current && webcamRef.current.video) {
-      const videoElement = webcamRef.current.video;
-      qrScannerRef.current = new QrScanner(
-        videoElement,
-        (result) => {
-          console.log('QR Code scanned:', result);
-          markAttendance(result.data);
-        },
-        {
-          onDecodeError: (err) => {
-            console.error('QR decode error:', err);
-          },
-          highlightScanRegion: true,
-          highlightCodeOutline: true,
-        }
-      );
-      qrScannerRef.current.start().catch(err => {
-        console.error('Error starting QR scanner:', err);
-        alert('Error starting camera. Please check camera permissions.');
-        setIsScanning(false);
-      });
-    }
-  };
-
-  const onWebcamError = (err) => {
-    console.error('Webcam error:', err);
-    alert('Camera access denied or unavailable. Please check camera permissions.');
-    setIsScanning(false);
-  };
-
   const stopScanning = () => {
     if (qrScannerRef.current) {
       qrScannerRef.current.stop();
@@ -58,113 +28,120 @@ const Attendance = () => {
     setIsScanning(false);
   };
 
-  const markAttendance = async (qrData) => {
-    // Parse QR data: ATTENDANCE:name:id:timestamp
-    const parts = qrData.split(':');
-    if (parts.length >= 4 && parts[0] === 'ATTENDANCE') {
-      const studentName = parts[1];
-      const studentId = parts[2];
-      const qrTimestamp = parts[3];
-      
-      try {
-        // Check if attendance already marked for this student and QR
-        const existingAttendances = await attendanceAPI.getAll();
-        const alreadyMarked = existingAttendances.some(att => 
-          att.studentId === studentId && att.qrTimestamp === qrTimestamp
-        );
-        
-        if (alreadyMarked) {
-          alert('Attendance already marked for this session!');
-          stopScanning();
-          return;
-        }
-        
-        const attendanceRecord = {
-          studentName: studentName,
-          studentId: studentId,
-          qrTimestamp: qrTimestamp,
-        };
+  const onWebcamReady = () => {
+    setWebcamReady(true);
+    const video = webcamRef.current.video;
 
-        await attendanceAPI.create(attendanceRecord);
-        setScannedData({ name: studentName, id: studentId });
-        setAttendanceMarked(true);
-        stopScanning();
-        alert('Attendance marked successfully!');
-      } catch (error) {
-        console.error('Error marking attendance:', error);
-        alert('Error marking attendance. Please try again.');
-        stopScanning();
-      }
-    } else {
-      alert('Invalid QR code. Please scan a valid attendance QR code.');
+    qrScannerRef.current = new QrScanner(
+      video,
+      (result) => markAttendance(result.data),
+      { highlightScanRegion: true, highlightCodeOutline: true }
+    );
+
+    qrScannerRef.current.start();
+  };
+
+  const markAttendance = async (qrData) => {
+    const parts = qrData.split(':');
+    if (parts[0] !== 'ATTENDANCE') {
+      alert('Invalid QR Code');
       stopScanning();
+      return;
     }
+
+    const [_, studentName, studentId, qrTimestamp] = parts;
+
+    const existing = await attendanceAPI.getAll();
+    const alreadyMarked = existing.some(
+      (a) => a.studentId === studentId && a.qrTimestamp === qrTimestamp
+    );
+
+    if (alreadyMarked) {
+      alert('Attendance already marked!');
+      stopScanning();
+      return;
+    }
+
+    await attendanceAPI.create({ studentName, studentId, qrTimestamp });
+    setScannedData({ name: studentName, id: studentId });
+    setAttendanceMarked(true);
+    stopScanning();
   };
 
   useEffect(() => {
-    return () => {
-      if (qrScannerRef.current) {
-        qrScannerRef.current.destroy();
-      }
-    };
+    return () => qrScannerRef.current?.destroy();
   }, []);
 
   return (
     <>
-    <Navbar />
-    <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 mt-20">
-      <div className="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-bold text-center mb-6">Student Attendance</h2>
-        
-        <p className="text-gray-600 text-center mb-6">
-          Scan the QR code provided by your instructor to mark your attendance.
-        </p>
+      <Navbar />
 
-        {!isScanning ? (
-          <button
-            onClick={startScanning}
-            className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-          >
-            Start Scanning QR Code
-          </button>
-        ) : (
-          <div className="mb-4">
-            {!webcamReady && (
-              <div className="text-center py-4">
-                <p className="text-gray-600">Initializing camera...</p>
-              </div>
-            )}
-            <Webcam
-              ref={webcamRef}
-              audio={false}
-              screenshotFormat="image/jpeg"
-              videoConstraints={{
-                width: 1280,
-                height: 720,
-                facingMode: 'environment',
-              }}
-              onUserMedia={onWebcamReady}
-              onUserMediaError={onWebcamError}
-              className={`w-full rounded-md ${webcamReady ? '' : 'hidden'}`}
-            />
-            {webcamReady && (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-100 to-purple-100 px-4 mt-20">
+        <div className="w-full max-w-md bg-white/80 backdrop-blur-lg rounded-2xl shadow-xl p-8">
+
+          <h2 className="text-3xl font-bold text-center text-indigo-700">
+            Student Attendance
+          </h2>
+
+          <p className="text-center text-gray-600 mt-2 mb-6">
+            Scan the instructor’s QR code to mark your attendance
+          </p>
+
+          <div className="text-center mb-6">
+            <Link
+              to="/registration"
+              className="text-sm text-indigo-600 hover:underline"
+            >
+              New student? Register here
+            </Link>
+          </div>
+
+          {!isScanning && (
+            <button
+              onClick={startScanning}
+              className="w-full py-3 rounded-lg bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition"
+            >
+              📷 Start QR Scan
+            </button>
+          )}
+
+          {isScanning && (
+            <div className="space-y-4">
+              {!webcamReady && (
+                <p className="text-center text-gray-500">
+                  Initializing camera...
+                </p>
+              )}
+
+              <Webcam
+                ref={webcamRef}
+                audio={false}
+                onUserMedia={onWebcamReady}
+                className={`rounded-xl ${webcamReady ? '' : 'hidden'}`}
+                videoConstraints={{ facingMode: 'environment' }}
+              />
+
               <button
                 onClick={stopScanning}
-                className="w-full mt-4 bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                className="w-full py-3 rounded-lg bg-red-500 text-white font-semibold hover:bg-red-600 transition"
               >
-                Stop Scanning
+                ❌ Stop Scanning
               </button>
-            )}
-          </div>
-        )}
+            </div>
+          )}
 
-        {attendanceMarked && scannedData && (
-          <div className="mt-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-md">
-            Attendance marked successfully for {scannedData.name} (ID: {scannedData.id})!
-          </div>
-        )}
+          {attendanceMarked && scannedData && (
+            <div className="mt-6 bg-green-100 border border-green-400 text-green-700 p-4 rounded-lg text-center">
+              ✅ Attendance marked successfully!
+              <br />
+              <span className="font-semibold">
+                {scannedData.name} (ID: {scannedData.id})
+              </span>
+            </div>
+          )}
+
+        </div>
       </div>
-    </div>
     </>
   );
 };

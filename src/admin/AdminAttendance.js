@@ -27,7 +27,7 @@ const AdminAttendance = () => {
       // Load attendance records from API
       const attendanceResponse = await attendanceAPI.getAll();
       setAttendanceRecords(attendanceResponse);
-      
+
       // Load students using API
       const studentsResponse = await studentsAPI.getAll();
       setStudents(studentsResponse);
@@ -46,13 +46,13 @@ const AdminAttendance = () => {
       alert('Please select a student.');
       return;
     }
-    
+
     const student = students.find(s => s._id === selectedStudent);
     if (!student) {
       alert('Selected student not found.');
       return;
     }
-    
+
     const data = `ATTENDANCE:${student.name}:${student.rollNo}:${new Date().toISOString()}`;
     expectedQrData.current = data;
     try {
@@ -65,7 +65,12 @@ const AdminAttendance = () => {
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    return date.toLocaleString();
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
   };
 
   const clearQR = () => {
@@ -88,11 +93,11 @@ const AdminAttendance = () => {
           </button>
         </div>
         <h1 className="text-2xl md:text-3xl font-bold mb-6">Attendance Management</h1>
-        
+
         {/* QR Code Generation Section */}
         <div className="bg-white shadow-md rounded-lg p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4">Generate QR Code for Student</h2>
-          
+
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-700 mb-1">
               Select Student
@@ -110,7 +115,7 @@ const AdminAttendance = () => {
               ))}
             </select>
           </div>
-          
+
           <div className="flex gap-2 mb-4">
             <button
               onClick={generateQRCode}
@@ -128,11 +133,11 @@ const AdminAttendance = () => {
               </button>
             )}
           </div>
-          
+
           {qrCodeUrl && (
             <div className="text-center">
               <p className="text-sm text-gray-600 mb-2">
-                QR Code for {students.find(s => s._id === selectedStudent)?.name} 
+                QR Code for {students.find(s => s._id === selectedStudent)?.name}
                 (Roll No: {students.find(s => s._id === selectedStudent)?.rollNo})
               </p>
               <img src={qrCodeUrl} alt="QR Code" className="mx-auto border-2 border-gray-300 rounded" />
@@ -140,46 +145,71 @@ const AdminAttendance = () => {
             </div>
           )}
         </div>
-        
+
         {/* Attendance Records Section */}
-        <h2 className="text-xl font-semibold mb-4">Attendance Records</h2>
-        
-        {attendanceRecords.length === 0 ? (
-          <p className="text-gray-700">No attendance records found.</p>
-        ) : (
-          <div className="bg-white shadow-md rounded-lg overflow-hidden">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Student Name
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Student ID
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Timestamp
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {attendanceRecords.map((record, index) => (
-                  <tr key={index}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {record.studentName}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {record.studentId}
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {formatDate(record.qrTimestamp)}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+       {/* Attendance Records Section */}
+<h2 className="text-xl font-semibold mb-4">Attendance Records</h2>
+
+{attendanceRecords.length === 0 ? (
+  <p className="text-gray-700">No attendance records found.</p>
+) : (
+  <>
+    {/* Mobile View - Cards */}
+    <div className="space-y-4 md:hidden">
+      {attendanceRecords.map((record, index) => (
+        <div
+          key={index}
+          className="bg-white p-4 rounded-lg shadow border"
+        >
+          <p className="text-sm">
+            <span className="font-semibold">Name:</span> {record.studentName}
+          </p>
+          <p className="text-sm">
+            <span className="font-semibold">ID:</span> {record.studentId}
+          </p>
+          <p className="text-sm text-gray-600">
+            <span className="font-semibold">Time:</span> {formatDate(record.markedAt)}
+          </p>
+        </div>
+      ))}
+    </div>
+
+    {/* Desktop View - Table */}
+    <div className="hidden md:block bg-white shadow-md rounded-lg overflow-x-auto">
+      <table className="min-w-full divide-y divide-gray-200">
+        <thead className="bg-gray-50">
+          <tr>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+              Student Name
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+              Student ID
+            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+              Timestamp
+            </th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-gray-200">
+          {attendanceRecords.map((record, index) => (
+            <tr key={index}>
+              <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                {record.studentName}
+              </td>
+              <td className="px-6 py-4 text-sm text-gray-500">
+                {record.studentId}
+              </td>
+              <td className="px-6 py-4 text-sm text-gray-500">
+                {formatDate(record.markedAt)}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </>
+)}
+
       </div>
     </div>
   );
