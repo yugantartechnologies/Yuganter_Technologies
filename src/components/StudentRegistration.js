@@ -85,7 +85,6 @@ const InternshipRegistrationForm = () => {
     if (!formData.internshipDuration) newErrors.internshipDuration = "Please select duration";
     if (!formData.preferredStartDate) newErrors.preferredStartDate = "Please select start date";
     if (!formData.mode) newErrors.mode = "Please select work mode";
-    if (!formData.internshipCategory) newErrors.internshipCategory = "Please select category";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -196,7 +195,7 @@ const InternshipRegistrationForm = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit}>
+        <form>
           {/* Section 1: Personal Information */}
           <div className="form-section">
             <h3 className="section-title">Personal Information</h3>
@@ -519,7 +518,8 @@ const InternshipRegistrationForm = () => {
           {/* Form Actions */}
           <div className="form-actions">
             <button
-              type="submit"
+              type="button"
+              onClick={handleSubmit}
               className="btn-submit"
               disabled={loading}
             >
