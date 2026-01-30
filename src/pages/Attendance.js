@@ -10,6 +10,7 @@ const Attendance = () => {
   const [attendanceMarked, setAttendanceMarked] = useState(false);
   const [scannedData, setScannedData] = useState(null);
   const [webcamReady, setWebcamReady] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const webcamRef = useRef(null);
   const qrScannerRef = useRef(null);
@@ -42,10 +43,18 @@ const Attendance = () => {
   };
 
   const markAttendance = async (qrData) => {
+    // Prevent multiple simultaneous submissions
+    if (isProcessing) {
+      return;
+    }
+
+    setIsProcessing(true);
+
     const parts = qrData.split(':');
     if (parts[0] !== 'ATTENDANCE') {
       alert('Invalid QR Code');
       stopScanning();
+      setIsProcessing(false);
       return;
     }
 
@@ -60,11 +69,13 @@ const Attendance = () => {
       if (alreadyMarked) {
         alert('Attendance already marked!');
         stopScanning();
+        setIsProcessing(false);
         return;
       }
     } catch (error) {
       alert('Error checking attendance: ' + error.message);
       stopScanning();
+      setIsProcessing(false);
       return;
     }
 
@@ -73,9 +84,11 @@ const Attendance = () => {
       setScannedData({ name: studentName, id: studentId });
       setAttendanceMarked(true);
       stopScanning();
+      setIsProcessing(false);
     } catch (error) {
       alert('Error marking attendance: ' + error.message);
       stopScanning();
+      setIsProcessing(false);
       return;
     }
   };
