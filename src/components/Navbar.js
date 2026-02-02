@@ -31,19 +31,31 @@ export default function Navbar() {
       }`}>
       <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 h-20 md:h-20 lg:h-20">
         {/* Logo */}
-        <Link to="/" className="flex items-center group cursor-pointer">
+        <Link to="/" className="flex items-center group cursor-pointer relative">
           <div className="px-2 relative flex items-center justify-center">
+            {/* Glow effect background */}
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-secondary-400 to-primary-400 opacity-0 group-hover:opacity-50 blur-xl transition-all duration-500 scale-150"></div>
+            
+            {/* Logo Image */}
             <img
               src={logo}
               alt="YugAntar"
-              className="w-12 h-12 md:w-14 md:h-14 rounded-full object-contain transition-transform duration-300 group-hover:scale-110"
+              className="w-12 h-12 md:w-14 md:h-14 rounded-full object-contain transition-all duration-300 group-hover:scale-110 relative z-10 drop-shadow-lg group-hover:drop-shadow-[0_0_20px_rgba(59,130,246,0.5)]"
             />
+            
+            {/* Inner glow ring */}
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-secondary-400/20 to-primary-400/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            {/* Rotating border effect */}
+            <div className="absolute inset-0 rounded-full border-2 border-transparent group-hover:border-secondary-400/50 transition-all duration-300 opacity-0 group-hover:opacity-100"></div>
           </div>
 
-          <h1 className="text-base md:text-lg lg:text-xl font-bold bg-gradient-to-r from-secondary-400 to-primary-400 bg-clip-text text-transparent">
-            YugAntar Technologies
-          </h1>
+          <div className="ml-3 relative z-10">
+            <h1 className="text-base md:text-lg lg:text-xl font-bold bg-gradient-to-r from-secondary-400 to-primary-400 bg-clip-text text-transparent transition-all duration-300 group-hover:from-secondary-300 group-hover:to-primary-300">
+              YugAntar Technologies
+            </h1>
+            <div className="h-1 w-0 group-hover:w-full bg-gradient-to-r from-secondary-400 to-primary-400 transition-all duration-500 mt-1 rounded-full"></div>
+          </div>
         </Link>
 
         {/* Desktop Menu */}
