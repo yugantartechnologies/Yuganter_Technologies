@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../public/Yuganter_Technologies.png';
+const logo = '/Yuganter_Technologies.png';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -16,13 +16,13 @@ export default function Footer() {
           {/* Company Info */}
           <div className="md:col-span-2">
             <div className="flex items-center mb-6">
-              <img src={logo} alt="YugAnter Technologies" className="w-16 h-16 mr-4 rounded-full object-contain ring-2 ring-secondary-400/30" />
+              <img src={logo} alt="YugAntar Technologies" className="w-16 h-16 mr-4 rounded-full object-contain " />
               <h2 className="text-lg md:text-xl font-bold bg-gradient-to-r from-secondary-400 to-primary-400 bg-clip-text text-transparent">
-                YugAnter Technologies
+                YugAntar Technologies
               </h2>
             </div>
             <p className="text-sm md:text-base text-gray-300 leading-relaxed mb-6 max-w-md">
-              YugAnter Technologies Ahmedabad - Leading software development company in Navrangpura offering web development, mobile app solutions, and IT consultancy for businesses in Gujarat.
+              YugAntar Technologies Ahmedabad - Leading software development company in Navrangpura offering web development, mobile app solutions, and IT consultancy for businesses in Gujarat.
             </p>
             {/* Social Media Links */}
             <div className="flex gap-4">
@@ -124,7 +124,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="border-t border-white/10 pt-8 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-gray-400 text-sm">
-            <p>© {currentYear} YugAnter Technologies – All rights reserved.</p>
+            <p>© {currentYear} YugAntar Technologies – All rights reserved.</p>
             <p>
               Developed by <a href="https://www.kevalontechnology.in/" target="_blank" rel="noopener noreferrer" className="text-secondary-400 font-semibold hover:text-secondary-300 transition-colors">Kevalon Technology</a>
             </p>

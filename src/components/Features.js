@@ -7,41 +7,41 @@ import {
   BriefcaseIcon,
   RocketLaunchIcon,
   LightBulbIcon,
-} from "@heroicons/react/24/solid";
+} from "@heroicons/react/24/outline";
 
 export default function Features() {
-  const [ref, isVisible] = useScrollAnimation({ threshold: 0.1 });
+  const [ref, isVisible] = useScrollAnimation({ threshold: 0.12 });
 
   const features = [
     {
       title: "Industry-Oriented Courses",
-      desc: "Learn MERN Stack, Python, Java, UI/UX, AI & more with real-world projects.",
-      icon: <BookOpenIcon className="w-10 h-10 text-white" />,
+      desc: "Master MERN Stack, Python, AI & more with hands-on projects.",
+      icon: <BookOpenIcon className="w-6 h-6" />,
     },
     {
       title: "Expert Trainers",
-      desc: "Get trained by professionals with real IT industry experience.",
-      icon: <AcademicCapIcon className="w-10 h-10 text-white" />,
+      desc: "Learn from industry veterans with real-world experience.",
+      icon: <AcademicCapIcon className="w-6 h-6" />,
     },
     {
       title: "Live Project Training",
-      desc: "Work on real projects to build confidence and job-ready skills.",
-      icon: <CodeBracketIcon className="w-10 h-10 text-white" />,
-    },
-    {
-      title: "Internship Support",
-      desc: "We provide internship guidance and experience after course completion.",
-      icon: <RocketLaunchIcon className="w-10 h-10 text-white" />,
+      desc: "Work on real-world projects to gain professional confidence.",
+      icon: <CodeBracketIcon className="w-6 h-6" />,
     },
     {
       title: "Placement Assistance",
-      desc: "Resume building, interview preparation & job assistance included.",
-      icon: <BriefcaseIcon className="w-10 h-10 text-white" />,
+      desc: "Resume grooming and mock interviews for job success.",
+      icon: <BriefcaseIcon className="w-6 h-6" />,
+    },
+    {
+      title: "Internship Support",
+      desc: "Kickstart your career with top internship opportunities.",
+      icon: <RocketLaunchIcon className="w-6 h-6" />,
     },
     {
       title: "Modern Learning",
-      desc: "Smart classrooms, digital tools & practical based teaching.",
-      icon: <LightBulbIcon className="w-10 h-10 text-white" />,
+      desc: "Practical execution over outdated theory-based learning.",
+      icon: <LightBulbIcon className="w-6 h-6" />,
     },
   ];
 
@@ -49,59 +49,71 @@ export default function Features() {
     <section
       ref={ref}
       id="features"
-      className="py-24 bg-gradient-to-b from-white via-gray-50 to-white"
+      className="relative py-28 bg-gradient-to-br from-dark-900 via-dark-800 to-dark-950 text-white overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-6">
+      {/* Subtle corporate texture */}
+      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/circuit.png')] opacity-5"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-dark-900/50 via-transparent"></div>
 
-        {/* Section Header */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6">
+
+        {/* Header */}
         <div
-          className={`text-center mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          className={`mb-20 transition-all duration-1000 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <span className="inline-block px-4 py-2 mb-4 bg-gradient-to-r from-secondary-100 to-primary-100 text-secondary-600 rounded-full text-sm font-semibold">
-            Why Choose Us
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-dark-900 mb-4">
-            Why Choose YugAntar Technologies?
+          <p className="text-primary-500 font-mono text-sm tracking-widest mb-3 uppercase">
+            Excellence in Education
+          </p>
+
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight leading-tight">
+            Why Choose <span className="text-primary-500">YugAntar Technologies</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-secondary-500 to-primary-500 mx-auto mb-4"></div>
-          <p className="text-gray-600 text-base md:text-lg max-w-3xl mx-auto leading-relaxed">
-            We provide high-quality IT education with practical learning and career-focused training that transforms students into industry-ready professionals.
+
+          <p className="mt-5 max-w-2xl text-gray-400 text-base md:text-lg leading-relaxed">
+            We build professionals, not just programmers. Our training model is
+            focused on industry readiness, practical execution, and career growth.
           </p>
         </div>
 
-        {/* Features Grid */}
-        <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature, index) => (
+        {/* Clean Corporate Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+          {features.map((f, i) => (
             <div
-              key={index}
-              className={`group relative overflow-hidden bg-white p-8 rounded-2xl shadow-lg border border-gray-100 hover:shadow-2xl hover:-translate-y-2 hover:border-secondary-200 transition-all duration-500 ${
+              key={i}
+              className={`group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 transition-all duration-500 hover:border-primary-500/40 hover:bg-white/10 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
+              style={{ transitionDelay: `${i * 80}ms` }}
             >
-              {/* Hover Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-secondary-50/0 to-primary-50/0 group-hover:from-secondary-50/50 group-hover:to-primary-50/50 transition-all duration-300"></div>
+              {/* Icon */}
+              <div className="mb-6 flex items-center justify-center w-12 h-12 rounded-xl bg-primary-500/10 text-primary-400 group-hover:bg-primary-500 group-hover:text-black transition-all duration-500">
+                {f.icon}
+              </div>
 
-              <div className="relative z-10 flex flex-col items-start">
-                {/* Icon */}
-                <div className="w-16 h-16 flex items-center justify-center mb-6 rounded-2xl bg-gradient-to-br from-secondary-500 to-primary-500 shadow-lg group-hover:scale-110 transition-transform duration-300">
-                  {feature.icon}
-                </div>
+              {/* Title */}
+              <h3 className="text-xl font-semibold mb-3 tracking-tight">
+                {f.title}
+              </h3>
 
-                {/* Title */}
-                <h3 className="text-lg md:text-xl font-bold text-gray-800 mb-3 group-hover:text-dark-900 transition-colors">
-                  {feature.title}
-                </h3>
+              {/* Description */}
+              <p className="text-gray-400 text-sm md:text-base leading-relaxed">
+                {f.desc}
+              </p>
 
-                {/* Description */}
-                <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-                  {feature.desc}
-                </p>
+              {/* Divider */}
+              <div className="mt-6 h-[1px] w-full bg-white/10 group-hover:bg-primary-500/40 transition-all"></div>
+
+              {/* Footer */}
+              <div className="mt-4 flex items-center justify-between text-xs uppercase tracking-wider text-gray-400">
+                <span>Corporate Training</span>
+                <span className="text-primary-500 font-semibold">→</span>
               </div>
             </div>
           ))}
+
         </div>
       </div>
     </section>

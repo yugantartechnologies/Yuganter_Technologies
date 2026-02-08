@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import logo from '../public/Yuganter_Technologies.png';
+const logo = '/Yuganter_Technologies.png';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);

@@ -11,13 +11,6 @@ export default function Hero({ onQuickEnroll }) {
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-dark-900/50 via-transparent to-transparent"></div>
 
-      {/* Floating Particles Effect */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-2 h-2 bg-secondary-400 rounded-full opacity-60 animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-3 h-3 bg-primary-400 rounded-full opacity-40 animate-pulse delay-300"></div>
-        <div className="absolute bottom-32 left-1/4 w-2 h-2 bg-secondary-300 rounded-full opacity-50 animate-pulse delay-700"></div>
-        <div className="absolute bottom-20 right-1/3 w-2 h-2 bg-primary-300 rounded-full opacity-40 animate-pulse delay-1000"></div>
-      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 py-24 md:py-32 flex flex-col md:flex-row items-center justify-between gap-16">
 
@@ -43,17 +36,8 @@ export default function Hero({ onQuickEnroll }) {
             Leading software development company Ahmedabad offering web development, mobile app development, digital marketing services, and IT consultancy in Navrangpura. Affordable web design and development for startups and businesses.
           </p>
 
-          {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            {/* <button
-              onClick={onQuickEnroll}
-              className="group px-6 py-3 bg-gradient-to-r from-secondary-500 to-primary-500 hover:from-secondary-600 hover:to-primary-600 text-white font-semibold text-base rounded-xl shadow-xl shadow-secondary-500/30 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-secondary-500/50 flex items-center justify-center gap-2"
-            >
-              <span>Enroll Now - Start Learning</span>
-              <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </button> */}
+           
             <Link
               to="/courses"
               className="px-6 py-3 border-2 border-primary-400/80 text-primary-300 hover:bg-primary-500/20 hover:border-primary-400 hover:text-white font-semibold text-base rounded-xl transition-all duration-300 backdrop-blur-sm text-center"

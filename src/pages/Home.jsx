@@ -14,10 +14,10 @@ export default function Home() {
   const [selectedCourse, setSelectedCourse] = useState(null);
 
   useEffect(() => {
-    document.title = 'YugAnter Technologies Ahmedabad - Best IT Company for Web & Software Development';
+    document.title = 'YugAntar Technologies Ahmedabad - Best IT Company for Web & Software Development';
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'YugAnter Technologies Ahmedabad - Leading IT company offering web development, mobile app development, software solutions, and digital marketing services in Navrangpura. Affordable custom software development for businesses.');
+      metaDescription.setAttribute('content', 'YugAntar Technologies Ahmedabad - Leading IT company offering web development, mobile app development, software solutions, and digital marketing services in Navrangpura. Affordable custom software development for businesses.');
     }
   }, []);
 

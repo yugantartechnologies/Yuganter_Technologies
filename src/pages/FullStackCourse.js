@@ -10,7 +10,7 @@ export default function FullStackCourse() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    document.title = 'Full Stack Development Course Ahmedabad - YugAnter Technologies';
+    document.title = 'Full Stack Development Course Ahmedabad - YugAntar Technologies';
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute('content', 'Enroll in Full Stack Development course in Ahmedabad using MERN stack. Learn React, Node.js, MongoDB with real projects and placement assistance in Navrangpura.');

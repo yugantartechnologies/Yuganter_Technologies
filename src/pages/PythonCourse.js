@@ -10,7 +10,7 @@ export default function PythonCourse() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    document.title = 'Python Development Course Ahmedabad - YugAnter Technologies';
+    document.title = 'Python Development Course Ahmedabad - YugAntar Technologies';
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute('content', 'Master Python programming in Ahmedabad with Django framework. Build scalable web applications and data solutions in our 5-month course with real projects.');

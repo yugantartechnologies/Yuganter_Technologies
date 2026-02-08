@@ -6,10 +6,10 @@ import Footer from "../components/Footer";
 
 export default function About() {
   useEffect(() => {
-    document.title = 'About YugAnter Technologies Ahmedabad - Best IT Company in Navrangpura';
+    document.title = 'About YugAntar Technologies Ahmedabad - Best IT Company in Navrangpura';
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'YugAnter Technologies Ahmedabad - Top IT company near Vijay Cross Road offering software development, web solutions, and tech services for businesses in Gujarat.');
+      metaDescription.setAttribute('content', 'YugAntar Technologies Ahmedabad - Top IT company near Vijay Cross Road offering software development, web solutions, and tech services for businesses in Gujarat.');
     }
   }, []);
   const stats = [

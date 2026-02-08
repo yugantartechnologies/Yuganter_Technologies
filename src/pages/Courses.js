@@ -11,7 +11,7 @@ export default function Courses() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    document.title = 'IT Courses Ahmedabad - YugAnter Technologies';
+    document.title = 'IT Courses Ahmedabad - YugAntar Technologies';
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute('content', 'Explore IT courses in Ahmedabad including Full Stack Development, Python, Data Science. Best IT training institute in Navrangpura with 100% placement assistance.');

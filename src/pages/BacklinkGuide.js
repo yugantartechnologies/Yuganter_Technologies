@@ -97,7 +97,7 @@ export default function BacklinkGuide() {
             <Navbar />
             <PageHeader
                 title="Backlink Generation Guide"
-                subtitle="Complete strategy for building high-quality backlinks for YugAnter Technologies"
+                subtitle="Complete strategy for building high-quality backlinks for YugAntar Technologies"
                 backgroundImage="https://images.unsplash.com/photo-1559526324-4b87b5e36e44?w=1200&h=400&fit=crop"
             />
 
@@ -110,7 +110,7 @@ export default function BacklinkGuide() {
                         </h2>
                         <p className="text-lg text-gray-600 max-w-3xl mx-auto">
                             This comprehensive guide outlines proven strategies to build high-quality backlinks
-                            for YugAnter Technologies, focusing on local Ahmedabad market and technical expertise.
+                            for YugAntar Technologies, focusing on local Ahmedabad market and technical expertise.
                         </p>
                     </div>
 

@@ -13,10 +13,10 @@ export default function Contact() {
   });
 
   useEffect(() => {
-    document.title = 'Contact YugAnter Technologies Ahmedabad - IT Company in Navrangpura';
+    document.title = 'Contact YugAntar Technologies Ahmedabad - IT Company in Navrangpura';
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
-      metaDescription.setAttribute('content', 'Contact YugAnter Technologies Ahmedabad for web development, mobile app development, and software solutions. Located near Vijay Cross Road in Navrangpura.');
+      metaDescription.setAttribute('content', 'Contact YugAntar Technologies Ahmedabad for web development, mobile app development, and software solutions. Located near Vijay Cross Road in Navrangpura.');
     }
   }, []);
 

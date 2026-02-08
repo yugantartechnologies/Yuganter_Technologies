@@ -6,10 +6,10 @@ import Navbar from "../components/Navbar";
 
 export default function Blog() {
     useEffect(() => {
-        document.title = 'IT Blog & Insights - YugAnter Technologies Ahmedabad';
+        document.title = 'IT Blog & Insights - YugAntar Technologies Ahmedabad';
         const metaDescription = document.querySelector('meta[name="description"]');
         if (metaDescription) {
-            metaDescription.setAttribute('content', 'Latest insights on web development, mobile apps, AI, and IT trends in Ahmedabad. Expert articles from YugAnter Technologies.');
+            metaDescription.setAttribute('content', 'Latest insights on web development, mobile apps, AI, and IT trends in Ahmedabad. Expert articles from YugAntar Technologies.');
         }
     }, []);
 
@@ -81,7 +81,7 @@ export default function Blog() {
                         </h2>
                         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
                             Expert insights on web development, mobile apps, AI, and digital transformation
-                            from our team at YugAnter Technologies Ahmedabad.
+                            from our team at YugAntar Technologies Ahmedabad.
                         </p>
                     </div>
 

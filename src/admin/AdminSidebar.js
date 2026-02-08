@@ -33,7 +33,7 @@ export default function AdminSidebar({ sidebarOpen, setSidebarOpen, onLogout }) 
         {/* Header */}
         <div className="p-6 border-b border-blue-700/50 bg-blue-900">
           <h2 className="text-2xl font-bold text-center">Admin Panel</h2>
-          <p className="text-xs text-blue-300 text-center mt-1">Yuganter Technologies</p>
+          <p className="text-xs text-blue-300 text-center mt-1">YugAntar Technologies</p>
         </div>
 
         {/* Links */}

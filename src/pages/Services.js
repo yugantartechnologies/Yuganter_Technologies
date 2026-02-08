@@ -10,7 +10,7 @@ export default function Services() {
   const [bookingModal, setBookingModal] = useState({ isOpen: false, service: null });
 
   useEffect(() => {
-    document.title = 'IT Services Ahmedabad - YugAnter Technologies';
+    document.title = 'IT Services Ahmedabad - YugAntar Technologies';
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute('content', 'Best IT services in Navrangpura Ahmedabad - Web development, mobile app development, software solutions, digital marketing, and IT consultancy for businesses.');
