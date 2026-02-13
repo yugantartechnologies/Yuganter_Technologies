@@ -125,9 +125,9 @@ export default function Footer() {
         <div className="border-t border-white/10 pt-8 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-gray-400 text-sm">
             <p>© {currentYear} YugAntar Technologies – All rights reserved.</p>
-            <p>
+            {/* <p>
               Developed by <a href="https://www.kevalontechnology.in/" target="_blank" rel="noopener noreferrer" className="text-secondary-400 font-semibold hover:text-secondary-300 transition-colors">Kevalon Technology</a>
-            </p>
+            </p> */}
           </div>
         </div>
       </div>
