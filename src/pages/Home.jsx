@@ -7,7 +7,7 @@ import Testimonials from '../components/Testimonials';
 import CTASection from '../components/CTASection';
 import EnrollmentModal from '../components/EnrollmentModal';
 import Footer from '../components/Footer';
-import AssociatedCompanies from '../components/AssociatedCompanies';
+// import AssociatedCompanies from '../components/AssociatedCompanies';
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -44,7 +44,7 @@ export default function Home() {
         <Features />
         <CourseHighlights />
         <Testimonials />
-        <AssociatedCompanies />
+        {/* <AssociatedCompanies /> */}
         <CTASection onQuickEnroll={handleQuickEnroll} />
       </main>
       <EnrollmentModal
